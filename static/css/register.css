@@ -1,0 +1,186 @@
+/* ===========================
+   GOOGLE FONT
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+
+    background: url("../images/login.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: -1;
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+/* ===========================
+   REGISTER BOX
+=========================== */
+
+.register-box {
+    width: 450px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+.register-box h2 {
+    text-align: center;
+    color: #fc8019;
+    margin-bottom: 10px;
+    font-size: 34px;
+}
+
+.register-box p {
+    text-align: center;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+/* ===========================
+   INPUT BOX
+=========================== */
+
+.input-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 15px 45px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    transition: .3s;
+}
+
+.input-box input:focus {
+    border-color: #fc8019;
+}
+
+.input-box i:first-child {
+    position: absolute;
+    left: 15px;
+    top: 17px;
+    color: #777;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 15px;
+    top: 17px;
+    cursor: pointer;
+    color: #777;
+}
+
+/* ===========================
+   TERMS
+=========================== */
+
+.terms {
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.terms input {
+    margin-right: 8px;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.register-btn {
+    width: 100%;
+    padding: 15px;
+    background: #fc8019;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.register-btn:hover {
+    background: #e66d00;
+}
+
+/* ===========================
+   LOGIN LINK
+=========================== */
+
+.login-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login-link a {
+    color: #fc8019;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:500px) {
+
+    .register-box {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .register-box h2 {
+        font-size: 28px;
+    }
+
+    .input-box input {
+        font-size: 15px;
+    }
+
+    .register-btn {
+        font-size: 16px;
+    }
+
+}

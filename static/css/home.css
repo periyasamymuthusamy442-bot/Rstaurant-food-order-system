@@ -1,0 +1,2441 @@
+/* =========================================================
+   FOODHUB - HOME PAGE
+   Professional Responsive CSS
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: #222;
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+    width: 100%;
+    height: 104px;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    width: 100%;
+    max-width: 1500px;
+    height: 100%;
+    margin: auto;
+    padding: 0 35px;
+
+    display: flex;
+    align-items: center;
+    gap: 38px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    width: 120px;
+    height: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-logo img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    color: #ff512f;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.brand-tagline {
+    color: #777777;
+    font-size: 13px;
+    margin-top: 6px;
+    letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   MAIN NAVIGATION
+========================================================= */
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    flex: 1;
+}
+
+.nav-link {
+    position: relative;
+    color: #292929;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    padding: 39px 0 34px;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.nav-link:hover {
+    color: #ff512f;
+}
+
+.nav-link.active {
+    color: #ff512f;
+}
+
+.nav-link.active::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 28px;
+
+    height: 2px;
+
+    background: #ff512f;
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   NAV ACTIONS
+========================================================= */
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SEARCH / CART ICON BUTTON
+========================================================= */
+
+.icon-btn {
+    width: 52px;
+    height: 52px;
+
+    border: 1px solid #eeeeee;
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #292929;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.icon-btn:hover {
+    color: #ff512f;
+    border-color: #ff512f;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+.cart-btn {
+    position: relative;
+}
+
+#cartCount {
+    position: absolute;
+
+    top: -5px;
+    right: -3px;
+
+    min-width: 20px;
+    height: 20px;
+
+    padding: 0 5px;
+
+    background: #ff512f;
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    border: 2px solid #ffffff;
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+.account-wrapper {
+    position: relative;
+}
+
+.profile-btn {
+    width: 52px;
+    height: 52px;
+
+    border: 3px solid #ffe1d9;
+    border-radius: 50%;
+
+    background: #ff512f;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.profile-btn:hover,
+.profile-btn.active {
+    background: #ff3d20;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   PROFILE MENU
+========================================================= */
+
+.profile-menu {
+    position: absolute;
+
+    top: 64px;
+    right: 0;
+
+    width: 280px;
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+    border-radius: 16px;
+
+    padding: 10px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.14);
+
+    display: none;
+
+    z-index: 9999;
+}
+
+.profile-menu.show {
+    display: block;
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px;
+}
+
+.profile-avatar {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    background: #ff512f;
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.profile-user-info {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.profile-user-info strong {
+    color: #222222;
+    font-size: 15px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-user-info span {
+    color: #888888;
+    font-size: 12px;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   PROFILE DIVIDER
+========================================================= */
+
+.profile-divider {
+    height: 1px;
+    background: #eeeeee;
+
+    margin: 7px 0;
+}
+
+
+/* =========================================================
+   PROFILE ITEMS
+========================================================= */
+
+.profile-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px;
+
+    color: #333333;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.profile-item i {
+    width: 20px;
+    text-align: center;
+}
+
+.profile-item:hover {
+    background: #fff1ed;
+    color: #ff512f;
+}
+
+.logout-item {
+    color: #e33b25;
+}
+
+
+/* =========================================================
+   HERO SECTION
+========================================================= */
+
+.hero {
+    width: 100%;
+    padding: 18px 25px 0;
+
+    background: #ffffff;
+}
+
+.hero-slider {
+    width: 100%;
+    max-width: 1500px;
+
+    height: 500px;
+
+    margin: 0 auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #111111;
+}
+
+
+/* =========================================================
+   HERO SLIDES
+========================================================= */
+
+.hero-slide {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* =========================================================
+   HERO OVERLAY
+========================================================= */
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.60) 32%,
+            rgba(0, 0, 0, 0.20) 68%,
+            rgba(0, 0, 0, 0.18) 100%
+        );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.hero-slide-content {
+    position: absolute;
+
+    left: 7%;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: min(620px, 55%);
+
+    color: #ffffff;
+
+    z-index: 5;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    background: #ff512f;
+    color: #ffffff;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 22px;
+}
+
+.hero-badge i {
+    font-size: 12px;
+}
+
+.hero-slide-content h1 {
+    font-size: clamp(42px, 5vw, 70px);
+
+    line-height: 0.98;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 20px;
+}
+
+.hero-slide-content h1 span {
+    display: block;
+    color: #ff512f;
+}
+
+.hero-slide-content p {
+    max-width: 580px;
+
+    color: rgba(255, 255, 255, 0.9);
+
+    font-size: 17px;
+
+    line-height: 1.6;
+
+    margin-bottom: 23px;
+}
+
+
+/* =========================================================
+   HERO INFO
+========================================================= */
+
+.hero-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 24px;
+
+    margin-bottom: 25px;
+}
+
+.hero-info span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hero-info i {
+    color: #ffb02e;
+}
+
+
+/* =========================================================
+   HERO BUTTON
+========================================================= */
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 15px 25px;
+
+    background: #ff512f;
+    color: #ffffff;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition: all 0.25s ease;
+}
+
+.hero-btn:hover {
+    background: #ff3d20;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 81, 47, 0.28);
+}
+
+
+/* =========================================================
+   SLIDER ARROWS
+========================================================= */
+
+.slider-btn {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 52px;
+    height: 52px;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    font-size: 18px;
+
+    backdrop-filter: blur(4px);
+
+    transition: all 0.25s ease;
+}
+
+.slider-btn:hover {
+    background: #ff512f;
+    border-color: #ff512f;
+}
+
+.slider-prev {
+    left: 20px;
+}
+
+.slider-next {
+    right: 20px;
+}
+
+
+/* =========================================================
+   SLIDER DOTS
+========================================================= */
+
+.slider-dots {
+    position: absolute;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    z-index: 20;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.65);
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.dot.active {
+    width: 30px;
+    border-radius: 10px;
+    background: #ff512f;
+}
+
+
+/* =========================================================
+   SEARCH SECTION
+========================================================= */
+
+.restaurant-search-section {
+    padding: 55px 25px 35px;
+
+    background: #ffffff;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 1190px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 50px;
+}
+
+.search-title {
+    flex: 1;
+}
+
+.search-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #ff512f;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+    margin-bottom: 8px;
+}
+
+.search-title h2 {
+    color: #242424;
+
+    font-size: 32px;
+    line-height: 1.2;
+
+    margin-bottom: 7px;
+}
+
+.search-title p {
+    color: #777777;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.restaurant-search-box {
+    width: 500px;
+    max-width: 100%;
+
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid #e3e3e3;
+
+    border-radius: 30px;
+
+    padding: 0 18px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.05);
+
+    transition: all 0.25s ease;
+}
+
+.restaurant-search-box:focus-within {
+    border-color: #ff512f;
+
+    box-shadow:
+        0 8px 28px rgba(255, 81, 47, 0.12);
+}
+
+.restaurant-search-box > i {
+    color: #777777;
+    font-size: 17px;
+
+    margin-right: 13px;
+}
+
+.restaurant-search-box input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #222222;
+
+    font-size: 15px;
+}
+
+.restaurant-search-box input::placeholder {
+    color: #999999;
+}
+
+#clearSearch {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    background: transparent;
+
+    color: #999999;
+
+    cursor: pointer;
+
+    border-radius: 50%;
+
+    transition: all 0.2s ease;
+}
+
+#clearSearch:hover {
+    background: #fff0ec;
+    color: #ff512f;
+}
+
+
+/* =========================================================
+   RESTAURANT SECTION
+========================================================= */
+
+.restaurants-section {
+    width: 100%;
+
+    padding: 50px 25px 90px;
+
+    background: #f8f8f8;
+}
+
+.section-heading {
+    width: 100%;
+    max-width: 1190px;
+
+    margin: 0 auto 30px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.section-label {
+    display: block;
+
+    color: #ff512f;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 7px;
+}
+
+.section-heading h2 {
+    color: #242424;
+
+    font-size: 34px;
+
+    line-height: 1.2;
+
+    margin-bottom: 7px;
+}
+
+.section-heading p {
+    color: #777777;
+
+    font-size: 15px;
+}
+
+.restaurant-count {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 11px 17px;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #333333;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.restaurant-count i {
+    color: #ff512f;
+}
+
+
+/* =========================================================
+   SEARCH RESULT MESSAGE
+========================================================= */
+
+.search-result-message {
+    width: 100%;
+    max-width: 1190px;
+
+    margin: 0 auto 20px;
+
+    color: #777777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESTAURANT GRID
+========================================================= */
+
+.restaurant-grid {
+    width: 100%;
+    max-width: 1190px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   RESTAURANT CARD
+========================================================= */
+
+.restaurant-card {
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================================
+   RESTAURANT IMAGE
+========================================================= */
+
+.restaurant-image {
+    width: 100%;
+    height: 190px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #eeeeee;
+}
+
+.restaurant-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.4s ease;
+}
+
+.restaurant-card:hover .restaurant-image img {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   RESTAURANT BADGES
+========================================================= */
+
+.restaurant-badge {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    padding: 7px 11px;
+
+    border-radius: 7px;
+
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.3px;
+}
+
+.restaurant-badge.orange {
+    background: #ff512f;
+}
+
+.restaurant-badge.dark {
+    background: #222222;
+}
+
+.restaurant-badge.green {
+    background: #16883d;
+}
+
+.restaurant-badge.blue {
+    background: #1976d2;
+}
+
+
+/* =========================================================
+   RESTAURANT INFO
+========================================================= */
+
+.restaurant-info {
+    padding: 18px;
+}
+
+.restaurant-info h3 {
+    color: #242424;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    margin-bottom: 4px;
+}
+
+.restaurant-info > p {
+    color: #777777;
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   RESTAURANT META
+========================================================= */
+
+.restaurant-meta {
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    color: #777777;
+
+    font-size: 12px;
+}
+
+.restaurant-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.restaurant-meta i {
+    color: #999999;
+}
+
+.restaurant-meta .rating {
+    color: #222222;
+    font-weight: 700;
+}
+
+.restaurant-meta .rating i {
+    color: #ffb000;
+}
+
+
+/* =========================================================
+   RESTAURANT BUTTON
+========================================================= */
+
+.restaurant-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 15px;
+
+    color: #ff512f;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: all 0.2s ease;
+}
+
+.restaurant-btn i {
+    transition: transform 0.2s ease;
+}
+
+.restaurant-btn:hover {
+    color: #e93d20;
+}
+
+.restaurant-btn:hover i {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   NO RESTAURANT
+========================================================= */
+
+.no-restaurant {
+    display: none;
+
+    width: 100%;
+    max-width: 500px;
+
+    margin: 40px auto;
+
+    text-align: center;
+
+    padding: 45px 25px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    border: 1px solid #eeeeee;
+}
+
+.no-restaurant.show {
+    display: block;
+}
+
+.no-restaurant-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #fff0ec;
+
+    color: #ff512f;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+}
+
+.no-restaurant h3 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.no-restaurant p {
+    color: #777777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#resetRestaurantSearch {
+    border: none;
+
+    background: #ff512f;
+    color: #ffffff;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CTA SECTION
+========================================================= */
+
+/* =========================================================
+   PROFESSIONAL CTA SECTION
+========================================================= */
+
+.cta-section {
+    width: 100%;
+    padding: 100px 30px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 105, 0, 0.22),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(255, 81, 47, 0.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #171717 0%,
+            #242424 50%,
+            #351b16 100%
+        );
+
+    position: relative;
+    overflow: hidden;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* Decorative glow */
+
+.cta-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    background: rgba(255, 105, 0, 0.12);
+
+    border-radius: 50%;
+
+    top: -150px;
+    left: -120px;
+
+    filter: blur(10px);
+
+    pointer-events: none;
+}
+
+
+.cta-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    background: rgba(255, 81, 47, 0.10);
+
+    border-radius: 50%;
+
+    bottom: -140px;
+    right: -100px;
+
+    filter: blur(10px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CTA CONTENT
+========================================================= */
+
+.cta-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 850px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   CTA LABEL
+========================================================= */
+
+.cta-label {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    color: #ff7043;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 20px;
+
+    text-transform: uppercase;
+}
+
+
+.cta-label i {
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   CTA TITLE
+========================================================= */
+
+.cta-content h2 {
+    margin: 0 auto 20px;
+
+    max-width: 850px;
+
+    color: #ffffff;
+
+    font-size: 52px;
+
+    line-height: 1.12;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+
+/* =========================================================
+   CTA DESCRIPTION
+========================================================= */
+
+.cta-content p {
+    max-width: 680px;
+
+    margin: 0 auto 35px;
+
+    color: #cfcfcf;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA BUTTON
+========================================================= */
+
+.cta-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    min-width: 230px;
+
+    padding: 16px 28px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #ff512f,
+        #ff6900
+    );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 25px rgba(255, 81, 47, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.cta-btn i {
+    font-size: 15px;
+
+    transition: transform 0.25s ease;
+}
+
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(255, 81, 47, 0.35);
+
+    background: linear-gradient(
+        135deg,
+        #ff6900,
+        #ff512f
+    );
+}
+
+
+.cta-btn:hover i {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   RESPONSIVE - 750px
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .cta-section {
+        padding: 75px 20px;
+    }
+
+    .cta-content h2 {
+        font-size: 40px;
+    }
+
+    .cta-content p {
+        font-size: 16px;
+
+        line-height: 1.6;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - 550px
+========================================================= */
+
+@media (max-width: 550px) {
+
+    .cta-section {
+        padding: 65px 18px;
+    }
+
+    .cta-content h2 {
+        font-size: 32px;
+
+        letter-spacing: -0.5px;
+    }
+
+    .cta-content p {
+        font-size: 15px;
+
+        margin-bottom: 28px;
+    }
+
+    .cta-btn {
+        width: 100%;
+
+        max-width: 250px;
+
+        padding: 15px 20px;
+    }
+
+}
+
+/* =========================================================
+   FOODHUB - PROFESSIONAL FOOTER
+========================================================= */
+
+.footer {
+    width: 100%;
+    background: #171717;
+    color: #ffffff;
+    margin-top: 0;
+    position: relative;
+}
+
+/* =========================================================
+   FOOTER CONTAINER
+========================================================= */
+
+.footer-container {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+
+    padding: 70px 35px 55px;
+
+    display: grid;
+    grid-template-columns: 1.7fr 1fr 1fr 1.4fr;
+    gap: 55px;
+}
+
+/* =========================================================
+   FOOTER BRAND
+========================================================= */
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    width: fit-content;
+
+    text-decoration: none;
+    color: #ffffff;
+
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    width: 52px;
+    height: 52px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+}
+
+.footer-logo span {
+    color: #ff512f;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+.footer-brand > p {
+    max-width: 330px;
+
+    color: #a9a9a9;
+
+    font-size: 15px;
+    line-height: 1.8;
+
+    margin-bottom: 25px;
+}
+
+/* =========================================================
+   SOCIAL LINKS
+========================================================= */
+
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.social-links a {
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid #3b3b3b;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #cfcfcf;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.social-links a:hover {
+    background: #ff512f;
+    border-color: #ff512f;
+
+    color: #ffffff;
+
+    transform: translateY(-4px);
+}
+
+/* =========================================================
+   FOOTER COLUMNS
+========================================================= */
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-column h3 {
+    position: relative;
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    margin-bottom: 25px;
+
+    padding-bottom: 12px;
+}
+
+/* Small orange line under heading */
+
+.footer-column h3::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 35px;
+    height: 3px;
+
+    background: #ff512f;
+
+    border-radius: 10px;
+}
+
+/* =========================================================
+   FOOTER LINKS
+========================================================= */
+
+.footer-column > a {
+    color: #a9a9a9;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    margin-bottom: 15px;
+
+    width: fit-content;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.footer-column > a:hover {
+    color: #ff512f;
+
+    transform: translateX(5px);
+}
+
+/* =========================================================
+   CONTACT DETAILS
+========================================================= */
+
+.footer-column > p {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    color: #a9a9a9;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-bottom: 16px;
+}
+
+.footer-column > p i {
+    width: 18px;
+
+    color: #ff512f;
+
+    font-size: 15px;
+
+    margin-top: 4px;
+
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.footer-bottom {
+    width: 100%;
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 22px 35px;
+
+    border-top: 1px solid #303030;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.footer-bottom p {
+    color: #858585;
+
+    font-size: 13px;
+
+    margin: 0;
+}
+
+.footer-bottom p:last-child {
+    color: #a0a0a0;
+
+    font-weight: 500;
+}
+
+/* =========================================================
+   SCROLL TOP BUTTON
+========================================================= */
+
+.scroll-top-btn {
+    position: fixed;
+
+    right: 28px;
+    bottom: 28px;
+
+    width: 56px;
+    height: 56px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #ff512f;
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(255, 81, 47, 0.30);
+
+    z-index: 999;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        background 0.2s ease;
+}
+
+.scroll-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+    background: #e93f22;
+
+    transform: translateY(-4px);
+}
+
+/* =========================================================
+   FOOTER RESPONSIVE - 1000px
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .footer-container {
+        grid-template-columns: 1.5fr 1fr 1fr;
+
+        gap: 40px;
+
+        padding: 60px 30px 45px;
+    }
+
+    .footer-brand {
+        grid-column: span 3;
+    }
+
+    .footer-brand > p {
+        max-width: 500px;
+    }
+}
+
+/* =========================================================
+   FOOTER RESPONSIVE - 750px
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 45px 30px;
+
+        padding: 50px 25px 40px;
+    }
+
+    .footer-brand {
+        grid-column: span 2;
+    }
+
+    .footer-logo span {
+        font-size: 27px;
+    }
+
+    .footer-brand > p {
+        font-size: 14px;
+
+        max-width: 100%;
+    }
+
+    .footer-column h3 {
+        font-size: 17px;
+    }
+
+    .footer-bottom {
+        padding: 20px 25px;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        text-align: center;
+
+        gap: 8px;
+    }
+
+    .scroll-top-btn {
+        width: 50px;
+        height: 50px;
+
+        right: 20px;
+        bottom: 20px;
+    }
+}
+
+/* =========================================================
+   FOOTER RESPONSIVE - 500px
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+
+        padding: 45px 20px 35px;
+
+        gap: 35px;
+    }
+
+    .footer-brand {
+        grid-column: span 1;
+    }
+
+    .footer-logo img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .footer-logo span {
+        font-size: 25px;
+    }
+
+    .footer-brand > p {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+    .social-links {
+        gap: 10px;
+    }
+
+    .social-links a {
+        width: 40px;
+        height: 40px;
+    }
+
+    .footer-column h3 {
+        margin-bottom: 20px;
+    }
+
+    .footer-column > a {
+        margin-bottom: 13px;
+    }
+
+    .footer-column > p {
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        padding: 18px 15px;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+    }
+
+    .scroll-top-btn {
+        width: 46px;
+        height: 46px;
+
+        right: 15px;
+        bottom: 15px;
+
+        font-size: 16px;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE - 1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .navbar {
+        padding: 0 25px;
+        gap: 25px;
+    }
+
+    .main-nav {
+        gap: 23px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+
+    .brand-name {
+        font-size: 31px;
+    }
+
+    .restaurant-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero-slider {
+        height: 470px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 950px
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .site-header {
+        height: 90px;
+    }
+
+    .navbar {
+        padding: 0 18px;
+        gap: 18px;
+    }
+
+    .brand-logo {
+        width: 45px;
+        height: 45px;
+    }
+
+    .brand-name {
+        font-size: 27px;
+    }
+
+    .brand-tagline {
+        font-size: 11px;
+    }
+
+    .main-nav {
+        gap: 17px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+        padding: 33px 0 30px;
+    }
+
+    .nav-link.active::after {
+        bottom: 23px;
+    }
+
+    .icon-btn,
+    .profile-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .hero {
+        padding: 14px 15px 0;
+    }
+
+    .hero-slider {
+        height: 430px;
+        border-radius: 16px;
+    }
+
+    .hero-slide-content {
+        left: 7%;
+        width: 65%;
+    }
+
+    .hero-slide-content h1 {
+        font-size: 48px;
+    }
+
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 25px;
+    }
+
+    .restaurant-search-box {
+        width: 100%;
+    }
+
+    .restaurant-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .site-header {
+        height: auto;
+    }
+
+    .navbar {
+        min-height: 82px;
+        padding: 10px 15px;
+
+        overflow-x: auto;
+    }
+
+    .brand-text {
+        display: none;
+    }
+
+    .main-nav {
+        flex: none;
+        gap: 18px;
+    }
+
+    .nav-link {
+        padding: 25px 0 20px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .nav-link.active::after {
+        bottom: 14px;
+    }
+
+    .nav-actions {
+        margin-left: auto;
+    }
+
+    .hero {
+        padding: 10px 10px 0;
+    }
+
+    .hero-slider {
+        height: 390px;
+        border-radius: 13px;
+    }
+
+    .hero-slide-content {
+        left: 7%;
+        width: 80%;
+    }
+
+    .hero-slide-content h1 {
+        font-size: 38px;
+        letter-spacing: -1px;
+    }
+
+    .hero-slide-content p {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .hero-badge {
+        padding: 8px 13px;
+        font-size: 10px;
+        margin-bottom: 14px;
+    }
+
+    .hero-info {
+        gap: 12px;
+        margin-bottom: 17px;
+    }
+
+    .hero-info span {
+        font-size: 11px;
+    }
+
+    .hero-btn {
+        padding: 12px 17px;
+        font-size: 12px;
+    }
+
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .slider-prev {
+        left: 10px;
+    }
+
+    .slider-next {
+        right: 10px;
+    }
+
+    .search-title h2 {
+        font-size: 27px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .restaurant-count {
+        align-self: flex-start;
+    }
+
+    .cta-content h2 {
+        font-size: 34px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 550px
+========================================================= */
+
+@media (max-width: 550px) {
+
+    .nav-actions {
+        gap: 7px;
+    }
+
+    .icon-btn,
+    .profile-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    #cartCount {
+        min-width: 17px;
+        height: 17px;
+        font-size: 9px;
+    }
+
+    .profile-menu {
+        width: 250px;
+        right: 0;
+    }
+
+    .hero-slider {
+        height: 340px;
+    }
+
+    .hero-slide-content {
+        left: 8%;
+        width: 82%;
+    }
+
+    .hero-slide-content h1 {
+        font-size: 31px;
+    }
+
+    .hero-slide-content p {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .hero-info {
+        display: none;
+    }
+
+    .hero-btn {
+        margin-top: 5px;
+    }
+
+    .slider-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .restaurant-search-section {
+        padding: 40px 15px 25px;
+    }
+
+    .restaurants-section {
+        padding: 40px 15px 60px;
+    }
+
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .restaurant-image {
+        height: 210px;
+    }
+
+    .section-heading h2 {
+        font-size: 28px;
+    }
+
+    .cta-section {
+        padding: 65px 20px;
+    }
+
+    .cta-content h2 {
+        font-size: 29px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .main-nav {
+        gap: 14px;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+
+    .hero-slider {
+        height: 310px;
+    }
+
+    .hero-slide-content h1 {
+        font-size: 27px;
+    }
+
+    .hero-slide-content p {
+        display: none;
+    }
+
+    .hero-badge {
+        margin-bottom: 10px;
+    }
+
+    .hero-btn {
+        padding: 10px 14px;
+    }
+
+    .slider-dots {
+        bottom: 10px;
+    }
+
+    .restaurant-image {
+        height: 190px;
+    }
+}
+/* =========================================================
+   NAVBAR - KEEP MENU CLOSE TO SEARCH
+========================================================= */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Navigation menu */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+
+    /* IMPORTANT */
+    flex: 0 0 auto;
+
+    margin-left: auto;
+}
+
+/* Navigation links */
+.main-nav .nav-link {
+    white-space: nowrap;
+}
+
+/* Right side icons */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-left: 5px;
+
+    flex-shrink: 0;
+}
+
+/* Search / Cart buttons */
+.nav-actions .icon-btn {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .main-nav {
+        gap: 25px;
+    }
+
+    .navbar {
+        gap: 20px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .main-nav {
+        gap: 18px;
+    }
+
+    .main-nav .nav-link {
+        font-size: 15px;
+    }
+
+    .nav-actions {
+        gap: 10px;
+    }
+}

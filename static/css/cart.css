@@ -1,0 +1,465 @@
+/* ============================================================
+   FoodHub — Cart Page
+   Theme: sunlit ivory page + two signature gradient cards
+   (mango-red for items, deep violet-gold for the bill)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+    --bg: #FFF9F2;
+    --nav-bg: #FFFFFF;
+    --ink: #2B1B12;
+    --ink-soft: #8A7A6C;
+    --line: #F0E4D8;
+
+    --brand: #FF6B35;
+    --brand-dark: #E5502A;
+    --brand-light: #FFE7DB;
+
+    --danger: #C1121F;
+    --danger-light: #FCEBEC;
+
+    /* Cart item card — mango / tomato gradient */
+    --item-grad: linear-gradient(135deg, #FF8A5B 0%, #E8402D 100%);
+    --item-ink: #FFFFFF;
+    --item-ink-soft: rgba(255, 255, 255, 0.78);
+    --item-chip-bg: rgba(255, 255, 255, 0.2);
+
+    /* Bill card — deep black gradient */
+    --bill-grad: linear-gradient(160deg, #1A1A1A 0%, #0A0A0A 100%);
+    --bill-ink: #FFFFFF;
+    --bill-ink-soft: rgba(255, 255, 255, 0.65);
+    --bill-accent: #FFC94D;
+
+    --font-display: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+
+    --radius: 18px;
+    --radius-sm: 12px;
+    --shadow: 0 10px 26px rgba(43, 27, 18, 0.08);
+    --shadow-hover: 0 16px 34px rgba(43, 27, 18, 0.12);
+    --item-shadow: 0 14px 30px rgba(232, 64, 45, 0.28);
+    --bill-shadow: 0 18px 38px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    font-family: var(--font-body);
+    color: var(--ink);
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 48px;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar .logo img {
+    height: 120px;
+    width: 120px;
+    object-fit: contain;
+}
+
+.navbar .logo h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar ul li a:hover {
+    background: var(--brand-light);
+    color: var(--brand-dark);
+}
+
+.navbar ul li a.active {
+    background: var(--brand);
+    color: #fff;
+}
+
+/* ================= CART LAYOUT ================= */
+
+.cart-container {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px 60px;
+    align-items: start;
+}
+
+.cart-left h1 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--ink);
+}
+
+#cartItems {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ---- Defensive fallback ----
+   If cart.js renders rows without the cart-item / cart-item-img
+   classes below, these generic rules still style the row and keep
+   the image sized correctly. Safe to keep even after classes are added. */
+
+#cartItems > div {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--item-grad);
+    color: var(--item-ink);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--item-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#cartItems > div:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 36px rgba(232, 64, 45, 0.36);
+}
+
+#cartItems img {
+    width: 84px;
+    height: 84px;
+    max-width: 84px;
+    min-width: 84px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Cart item card — styling ready for JS-rendered rows.
+   Give each row this markup for the best result:
+   <div class="cart-item">
+     <img class="cart-item-img" src="..." alt="...">
+     <div class="cart-item-info">
+       <h3>Name</h3>
+       <p class="cart-item-price">₹120</p>
+     </div>
+     <div class="qty-control">
+       <button class="qty-btn">-</button>
+       <span class="qty-value">1</span>
+       <button class="qty-btn">+</button>
+     </div>
+     <button class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+   </div>
+*/
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--item-grad);
+    color: var(--item-ink);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--item-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 36px rgba(232, 64, 45, 0.36);
+}
+
+.cart-item-img {
+    width: 84px;
+    height: 84px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h3 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--item-ink);
+}
+
+.cart-item-price {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--item-ink-soft);
+    font-size: 15px;
+}
+
+.qty-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--item-chip-bg);
+    border-radius: 999px;
+    padding: 6px 14px;
+}
+
+.qty-btn {
+    width: 26px;
+    height: 26px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--brand-dark);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.qty-btn:hover {
+    background: #FFF1EA;
+    transform: scale(1.06);
+}
+
+.qty-value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    min-width: 16px;
+    text-align: center;
+    color: var(--item-ink);
+}
+
+.remove-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.16);
+    color: var(--item-ink);
+    font-size: 15px;
+    cursor: pointer;
+    padding: 9px;
+    border-radius: 50%;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.remove-btn:hover {
+    background: #fff;
+    color: var(--danger);
+}
+
+/* Empty cart state */
+
+.empty-cart {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--ink-soft);
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1px dashed var(--line);
+}
+
+.empty-cart i {
+    font-size: 40px;
+    color: var(--brand);
+    margin-bottom: 12px;
+}
+
+/* ================= BILL — RECEIPT CARD ================= */
+
+.bill {
+    background: var(--bill-grad);
+    color: var(--bill-ink);
+    border-radius: var(--radius-sm);
+    padding: 28px 26px 26px;
+    box-shadow: var(--bill-shadow);
+    position: sticky;
+    top: 92px;
+    font-family: var(--font-mono);
+
+    /* perforated "receipt" edge, torn-paper feel, cut against the page bg */
+    position: relative;
+}
+
+.bill::before,
+.bill::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background:
+        radial-gradient(circle at 10px 50%, var(--bg) 6px, transparent 7px) repeat-x;
+    background-size: 20px 14px;
+}
+
+.bill::before {
+    top: -7px;
+}
+
+.bill::after {
+    bottom: -7px;
+    transform: rotate(180deg);
+}
+
+.bill h2 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--bill-ink);
+}
+
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--bill-ink-soft);
+    padding: 8px 0;
+}
+
+.bill-row span:last-child {
+    color: var(--bill-ink);
+    font-weight: 700;
+}
+
+.bill hr {
+    border: none;
+    border-top: 1px dashed rgba(255, 255, 255, 0.25);
+    margin: 12px 0;
+}
+
+.bill-row.total {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bill-ink);
+    padding-top: 10px;
+}
+
+.bill-row.total span:last-child {
+    color: var(--bill-accent);
+    font-size: 20px;
+}
+
+.checkout-btn {
+    width: 100%;
+    margin-top: 22px;
+    padding: 14px;
+    border: none;
+    border-radius: 999px;
+    background: var(--bill-accent);
+    color: #1A1A1A;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow: 0 12px 26px rgba(255, 201, 77, 0.4);
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.checkout-btn:hover {
+    background: #FFD873;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(255, 201, 77, 0.5);
+}
+
+.checkout-btn:active {
+    transform: translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .cart-container {
+        grid-template-columns: 1fr;
+    }
+
+    .bill {
+        position: static;
+    }
+
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .navbar .logo img {
+        height: 70px;
+        width: 70px;
+    }
+
+    .navbar ul {
+        gap: 2px;
+    }
+
+    .navbar ul li a {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-item {
+        flex-wrap: wrap;
+    }
+
+    .cart-item-info {
+        flex-basis: 100%;
+        order: 3;
+    }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

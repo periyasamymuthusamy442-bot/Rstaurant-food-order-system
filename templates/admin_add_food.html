@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Menu Item - FoodHub</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_add_food.css') }}">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <img src="{{ url_for('static', filename='images/logo.png') }}"
+                     alt="FoodHub Logo">
+            </div>
+
+            <div>
+                <h2>FoodHub</h2>
+                <span>Restaurant Admin</span>
+            </div>
+        </div>
+
+        <div class="restaurant-box">
+
+            <div class="restaurant-avatar">
+                {{ (restaurant_name or "R")[0]|upper }}
+            </div>
+
+            <div>
+                <h3>{{ restaurant_name }}</h3>
+                <span>Restaurant Owner</span>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="{{ url_for('admin_dashboard') }}"
+               class="nav-item">
+                📊
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('admin_add_food_page') }}"
+               class="nav-item active">
+                ➕
+                <span>Add Menu Item</span>
+            </a>
+
+            <a href="{{ url_for('edit_food_page') }}"
+               class="nav-item">
+                ✏️
+                <span>Manage Menu</span>
+            </a>
+
+            <a href="{{ url_for('view_orders_page') }}"
+               class="nav-item">
+                🛒
+                <span>Orders</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button onclick="logoutAdmin()"
+                    class="logout-btn">
+                🚪 Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="top-header">
+
+            <div>
+                <h1>Add New Menu Item</h1>
+
+                <p>
+                    Add a new food item to
+                    {{ restaurant_name }}
+                </p>
+            </div>
+
+        </header>
+
+
+        <section class="form-section">
+
+            <div class="form-card">
+
+                <div class="form-header">
+                    <div class="form-icon">🍔</div>
+
+                    <div>
+                        <h2>Add Food Item</h2>
+
+                        <p>
+                            Add a new item to your restaurant menu.
+                        </p>
+                    </div>
+                </div>
+
+
+                <form id="addFoodForm"
+                      enctype="multipart/form-data">
+
+                    <div class="form-group">
+
+                        <label for="foodName">
+                            Food Name
+                        </label>
+
+                        <input type="text"
+                               id="foodName"
+                               name="name"
+                               placeholder="Enter food name"
+                               required>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Category
+                            </label>
+
+                            <select id="category"
+                                    name="category"
+                                    required>
+
+                                <option value="">
+                                    Select Category
+                                </option>
+
+                                <option value="Pizza">
+                                    Pizza
+                                </option>
+
+                                <option value="Burger">
+                                    Burger
+                                </option>
+
+                                <option value="Biryani">
+                                    Biryani
+                                </option>
+
+                                <option value="Indian">
+                                    Indian
+                                </option>
+
+                                <option value="Chinese">
+                                    Chinese
+                                </option>
+
+                                <option value="Dessert">
+                                    Dessert
+                                </option>
+
+                                <option value="Drinks">
+                                    Drinks
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="price">
+                                Price
+                            </label>
+
+                            <input type="number"
+                                   id="price"
+                                   name="price"
+                                   placeholder="Enter price"
+                                   min="0"
+                                   step="0.01"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <textarea id="description"
+                                  name="description"
+                                  placeholder="Enter food description"
+                                  rows="5"></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="image">
+                            Food Image
+                        </label>
+
+                        <input type="file"
+                               id="image"
+                               name="image"
+                               accept="image/*">
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <a href="{{ url_for('admin_dashboard') }}"
+                           class="cancel-btn">
+                            Cancel
+                        </a>
+
+                        <button type="submit"
+                                class="submit-btn">
+                            ➕ Add Menu Item
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='js/admin_common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin_add_food.js') }}"></script>
+
+</body>
+
+</html>

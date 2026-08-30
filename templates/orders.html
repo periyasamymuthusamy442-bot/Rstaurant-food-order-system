@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>FoodHub | My Orders</title>
+
+    <!-- Orders CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/orders.css') }}" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  </head>
+
+  <body>
+    <!--  ======================================
+         NAVBAR
+    =======================================  -->
+
+    <nav class="navbar">
+      <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FoodHub Logo" />
+
+        <h2>FoodHub</h2>
+      </div>
+
+      <ul>
+        <li>
+          <a href="{{ url_for('home_page') }}">Home</a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('menu_page') }}">Menu</a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('cart_page') }}">Cart</a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('offers_page') }}">Offers</a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('orders_page') }}" class="active">Orders</a>
+        </li>
+
+        <li>
+          <a href="{{ url_for('contact_page') }}">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!--  ======================================
+         ORDERS SECTION
+    =======================================  -->
+
+    <section class="orders">
+      <!-- Page Heading -->
+
+      <h1>
+        <i class="fa-solid fa-box"></i>
+        My Orders
+      </h1>
+
+      <!--  ======================================
+             ORDERS CONTAINER
+
+             JavaScript will load orders here.
+        =======================================  -->
+
+      <div id="ordersContainer">
+        <!-- Loading message -->
+
+        <div class="loading">
+          <i class="fa-solid fa-spinner fa-spin"></i>
+
+          <p>Loading your orders...</p>
+        </div>
+      </div>
+    </section>
+
+    <!--  ======================================
+         ORDER CARD TEMPLATE
+
+         JavaScript can use this structure
+         when displaying each order.
+    =======================================  -->
+
+    <template id="orderTemplate">
+      <div class="order-card">
+        <!--  ==================================
+                 FOOD IMAGE
+            ===================================  -->
+
+        <div class="food-image">
+          <img class="order-food-image" src="" alt="Food Image" />
+        </div>
+
+        <!--  ==================================
+                 ORDER DETAILS
+            ===================================  -->
+
+        <div class="order-details">
+          <!-- Food Name -->
+
+          <h2 class="food-name">Food Name</h2>
+
+          <!-- Order Information -->
+
+          <div class="order-info">
+            <!-- Order ID -->
+
+            <div class="info-item">
+              <i class="fa-solid fa-hashtag"></i>
+
+              <span>Order ID:</span>
+
+              <strong class="order-id">-</strong>
+            </div>
+
+            <!-- Quantity -->
+
+            <div class="info-item">
+              <i class="fa-solid fa-layer-group"></i>
+
+              <span>Quantity:</span>
+
+              <strong class="order-quantity">1</strong>
+            </div>
+
+            <!-- Total -->
+
+            <div class="info-item">
+              <i class="fa-solid fa-indian-rupee-sign"></i>
+
+              <span>Total:</span>
+
+              <strong class="order-total">₹0.00</strong>
+            </div>
+
+            <!-- Ordered Date -->
+
+            <div class="info-item">
+              <i class="fa-regular fa-calendar"></i>
+
+              <span>Ordered On:</span>
+
+              <strong class="order-date">-</strong>
+            </div>
+          </div>
+
+          <!--  ==================================
+                     ORDER STATUS
+                ===================================  -->
+
+          <div class="order-status">
+            <span class="status-badge">
+              <i class="fa-solid fa-magnifying-glass"></i>
+
+              <span class="status-text">Preparing</span>
+            </span>
+          </div>
+
+          <!--  ==================================
+                     ORDER TRACKING
+                ===================================  -->
+
+          <div class="tracking">
+            <!-- Preparing -->
+
+            <div class="track-step active">
+              <div class="track-icon">🔍</div>
+
+              <span>Preparing</span>
+            </div>
+
+            <!-- Line -->
+
+            <div class="track-line"></div>
+
+            <!-- Cooking -->
+
+            <div class="track-step">
+              <div class="track-icon">👨‍🍳</div>
+
+              <span>Cooking</span>
+            </div>
+
+            <!-- Line -->
+
+            <div class="track-line"></div>
+
+            <!-- Out for Delivery -->
+
+            <div class="track-step">
+              <div class="track-icon">🛵</div>
+
+              <span>Out for Delivery</span>
+            </div>
+
+            <!-- Line -->
+
+            <div class="track-line"></div>
+
+            <!-- Delivered -->
+
+            <div class="track-step">
+              <div class="track-icon">✅</div>
+
+              <span>Delivered</span>
+            </div>
+          </div>
+        </div>
+
+        <!--  ==================================
+                 TRACK ORDER BUTTON
+            ===================================  -->
+
+        <div class="order-action">
+          <button class="track-order-btn">
+            <i class="fa-solid fa-location-dot"></i>
+
+            Track Order
+          </button>
+        </div>
+      </div>
+    </template>
+
+    <!--  ======================================
+         EMPTY ORDERS TEMPLATE
+    =======================================  -->
+
+    <template id="emptyOrdersTemplate">
+      <div class="empty-orders">
+        <div class="empty-icon">
+          <i class="fa-solid fa-box-open"></i>
+        </div>
+
+        <h2>No Orders Yet</h2>
+
+        <p>You haven't placed any orders yet.</p>
+
+        <a href="{{ url_for('menu_page') }}" class="browse-menu-btn">
+          <i class="fa-solid fa-utensils"></i>
+
+          Browse Menu
+        </a>
+      </div>
+    </template>
+
+    <!--  ======================================
+         ORDERS JAVASCRIPT
+    =======================================  -->
+
+    <script src="{{ url_for('static', filename='js/orders.js') }}"></script>
+  </body>
+</html>

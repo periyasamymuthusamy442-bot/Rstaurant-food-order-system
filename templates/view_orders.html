@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Orders - FoodHub</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/view_orders.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <img src="{{ url_for('static', filename='images/logo.png') }}"
+                     alt="FoodHub Logo">
+            </div>
+
+            <div>
+                <h2>FoodHub</h2>
+                <span>Restaurant Admin</span>
+            </div>
+
+        </div>
+
+
+        <div class="restaurant-box">
+
+            <div class="restaurant-avatar">
+                {{ (restaurant_name or "R")[0]|upper }}
+            </div>
+
+            <div class="restaurant-info">
+                <h3>{{ restaurant_name or "Restaurant" }}</h3>
+                <span>Restaurant Owner</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('admin_add_food_page') }}" class="nav-item">
+                <span class="nav-icon">➕</span>
+                <span>Add Menu Item</span>
+            </a>
+
+            <a href="{{ url_for('edit_food_page') }}" class="nav-item">
+                <span class="nav-icon">✏️</span>
+                <span>Manage Menu</span>
+            </a>
+
+            <a href="{{ url_for('view_orders_page') }}" class="nav-item active">
+                <span class="nav-icon">🛒</span>
+                <span>Orders</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn" onclick="logoutAdmin()">
+                <span>🚪</span>
+                <span>Logout</span>
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+
+                <div>
+                    <h1>Orders</h1>
+                    <p>All orders placed for {{ restaurant_name or "your restaurant" }}</p>
+                </div>
+
+            </div>
+
+            <div class="header-right">
+
+                <button type="button" class="primary-btn" id="refreshOrdersBtn">
+                    <i class="fa-solid fa-rotate"></i>
+                    Refresh
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Customer Orders</h2>
+                    <p>Update order status as it moves through preparation and delivery</p>
+                </div>
+            </div>
+
+            <div class="table-container">
+
+                <table class="orders-table">
+
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Delivery Address</th>
+                            <th>Items</th>
+                            <th>Amount</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="ordersTableBody">
+
+                        <tr>
+                            <td colspan="8" class="empty-state">
+                                <div class="empty-icon">⏳</div>
+                                <h3>Loading orders...</h3>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+            <p>© 2026 FoodHub Restaurant Management System</p>
+            <span>Multi-Restaurant Admin Dashboard</span>
+        </footer>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/admin_common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/view_orders.js') }}"></script>
+
+
+</body>
+
+</html>

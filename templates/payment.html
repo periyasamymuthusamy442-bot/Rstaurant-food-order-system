@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FoodHub | Payment</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/payment.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==============================
+     NAVBAR
+============================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="FoodHub Logo">
+
+        <h2>FoodHub</h2>
+
+    </div>
+
+
+    <ul>
+
+        <li>
+            <a href="{{ url_for('home_page') }}">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('menu_page') }}">
+                Menu
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('cart_page') }}">
+                Cart
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('payment_page') }}"
+               class="active">
+                Payment
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<!-- ==============================
+     PAYMENT SECTION
+============================== -->
+
+<section class="payment-container">
+
+    <div class="payment-box">
+
+
+        <h1>💳 Payment</h1>
+
+
+        <!-- ==============================
+             DELIVERY DETAILS
+        =============================== -->
+
+        <h3 class="section-label">
+            <i class="fa-solid fa-truck-fast"></i>
+            Delivery Details
+        </h3>
+
+        <div class="delivery-details-box">
+
+            <div class="form-group">
+                <label for="deliveryName">Full Name</label>
+                <input type="text" id="deliveryName"
+                       placeholder="Your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="deliveryPhone">Phone Number</label>
+                <input type="text" id="deliveryPhone" maxlength="10"
+                       placeholder="10-digit mobile number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="deliveryAddress">Delivery Address</label>
+                <textarea id="deliveryAddress" rows="3"
+                          placeholder="House no, street, area, city, pincode" required></textarea>
+            </div>
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <h3>
+            Total Amount:
+            <span id="totalAmount">
+                ₹0
+            </span>
+        </h3>
+
+
+        <h3 class="section-label">
+            Select Payment Method
+        </h3>
+
+
+
+        <!-- ==============================
+             CASH ON DELIVERY
+        =============================== -->
+
+        <div class="payment-option">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="Cash On Delivery"
+                    checked
+                >
+
+                💵 Cash On Delivery
+
+            </label>
+
+        </div>
+
+
+
+        <!-- ==============================
+             CARD
+        =============================== -->
+
+        <div class="payment-option">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="Credit / Debit Card"
+                >
+
+                💳 Credit / Debit Card
+
+            </label>
+
+        </div>
+
+
+
+        <!-- ==============================
+             UPI
+        =============================== -->
+
+        <div class="payment-option">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="UPI Payment"
+                >
+
+                📱 UPI Payment
+
+            </label>
+
+        </div>
+
+
+
+        <!-- ==============================
+             NET BANKING
+        =============================== -->
+
+        <div class="payment-option">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="Net Banking"
+                >
+
+                🏦 Net Banking
+
+            </label>
+
+        </div>
+
+
+
+        <!-- ==============================
+             PLACE ORDER
+        =============================== -->
+
+        <button
+            type="button"
+            onclick="placeOrder()">
+
+            🛒 Place Order
+
+        </button>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==============================
+     PAYMENT JS
+============================== -->
+
+<script src="{{ url_for('static', filename='js/payment.js') }}"></script>
+
+
+</body>
+
+</html>

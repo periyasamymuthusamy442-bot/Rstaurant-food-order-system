@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - FoodHub</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Profile CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/profile.css') }}?v=2"
+    >
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="site-header">
+
+        <div class="navbar">
+
+            <!-- LOGO -->
+            <a href="/" class="logo-link">
+
+                <img
+                    src="{{ url_for('static', filename='images/logo.png') }}"
+                    alt="FoodHub Logo"
+                    class="logo-image"
+                >
+
+                <div class="logo-text">
+
+                    <span class="logo-title">
+                        FoodHub
+                    </span>
+
+                    <span class="logo-tagline">
+                        Taste. Order. Enjoy.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+            <nav class="nav-links">
+
+                <a href="/">
+                    Home
+                </a>
+
+                <a href="/home.html#restaurants">
+                    Restaurants
+                </a>
+
+                <a href="/menu.html">
+                    Menu
+                </a>
+
+                <a href="/offers.html">
+                    Offers
+                </a>
+
+                <a href="/orders.html">
+                    Orders
+                </a>
+
+                <a href="/contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- RIGHT ACTIONS -->
+            <div class="nav-actions">
+
+                <!-- CART -->
+                <button
+                    type="button"
+                    class="cart-btn"
+                    id="cartButton"
+                    aria-label="Shopping Cart"
+                >
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <span
+                        class="cart-count"
+                        id="cartCount"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <!-- PROFILE AREA -->
+                <div class="profile-wrapper">
+
+                    <!-- PROFILE BUTTON -->
+                    <button
+                        type="button"
+                        class="profile-btn"
+                        id="profileButton"
+                        aria-label="Profile"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                    >
+
+                        {{ session.get('user_name', 'U')[0]|upper }}
+
+                    </button>
+
+
+                    <!-- PROFILE DROPDOWN -->
+                    <div
+                        class="profile-dropdown"
+                        id="profileDropdown"
+                    >
+
+                        <!-- USER INFO -->
+                        <div class="profile-dropdown-header">
+
+                            <div class="profile-dropdown-avatar">
+                                {{ session.get('user_name', 'U')[0]|upper }}
+                            </div>
+
+                            <div class="profile-dropdown-user">
+
+                                <div class="profile-dropdown-name">
+                                    {{ session.get('user_name', 'User') }}
+                                </div>
+
+                                <div class="profile-dropdown-email">
+                                    {{ session.get('user_email', 'Not available') }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PROFILE -->
+                        <a href="/profile.html">
+
+                            <i class="fa-regular fa-user"></i>
+
+                            <span>
+                                My Profile
+                            </span>
+
+                        </a>
+
+
+                        <!-- ORDERS -->
+                        <a href="/orders.html">
+
+                            <i class="fa-solid fa-box"></i>
+
+                            <span>
+                                My Orders
+                            </span>
+
+                        </a>
+
+
+                        <!-- CART -->
+                        <a href="/cart.html">
+
+                            <i class="fa-solid fa-cart-shopping"></i>
+
+                            <span>
+                                My Cart
+                            </span>
+
+                        </a>
+
+
+                        <!-- SETTINGS -->
+                        <a href="{{ url_for('settings_page') }}">
+
+                            <i class="fa-solid fa-gear"></i>
+
+                            <span>
+                                Settings
+                            </span>
+
+                        </a>
+
+
+                        <!-- HELP -->
+                        <a href="{{ url_for('help_page') }}">
+
+                            <i class="fa-regular fa-circle-question"></i>
+
+                            <span>
+                                Help & Support
+                            </span>
+
+                        </a>
+
+
+                        <!-- DIVIDER -->
+                        <div class="dropdown-divider"></div>
+
+
+                        <!-- LOGOUT -->
+                        <button
+                            type="button"
+                            id="logoutButton"
+                            class="logout-button"
+                        >
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            <span>
+                                Logout
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         PROFILE PAGE
+    ========================== -->
+
+    <main class="profile-page">
+
+        <div class="profile-container">
+
+            <!-- TITLE -->
+            <h1 class="page-title">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </h1>
+
+
+            <!-- PROFILE CARD -->
+            <section class="profile-card">
+
+                <!-- PROFILE TOP -->
+                <div class="profile-top">
+
+                    <!-- AVATAR -->
+                    <div class="profile-avatar">
+
+                        {{ session.get('user_name', 'U')[0]|upper }}
+
+                    </div>
+
+
+                    <!-- USER INFO -->
+                    <div class="profile-user-info">
+
+                        <h2>
+                            {{ session.get('user_name', 'User') }}
+                        </h2>
+
+                        <p>
+                            FoodHub Customer
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DIVIDER -->
+                <div class="profile-divider"></div>
+
+
+                <!-- DETAILS -->
+                <div class="profile-details">
+
+                    <!-- NAME -->
+                    <div class="detail-row">
+
+                        <div class="detail-icon">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+
+                        <div class="detail-label">
+                            Name
+                        </div>
+
+                        <div class="detail-value">
+                            {{ session.get('user_name', 'User') }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+                    <div class="detail-row">
+
+                        <div class="detail-icon">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+
+                        <div class="detail-label">
+                            Email
+                        </div>
+
+                        <div class="detail-value">
+                            {{ session.get('user_email', 'Not available') }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACCOUNT -->
+                    <div class="detail-row">
+
+                        <div class="detail-icon">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+
+                        <div class="detail-label">
+                            Account
+                        </div>
+
+                        <div class="detail-value">
+                            FoodHub Customer
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- Profile JS -->
+    <script
+        src="{{ url_for('static', filename='js/profile.js') }}?v=2"
+    ></script>
+
+</body>
+
+</html>

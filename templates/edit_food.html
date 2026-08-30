@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Menu - FoodHub</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/manage_menu.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <img src="{{ url_for('static', filename='images/logo.png') }}"
+                     alt="FoodHub Logo">
+            </div>
+
+            <div>
+
+                <h2>
+                    FoodHub
+                </h2>
+
+                <span>
+                    Restaurant Admin
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RESTAURANT INFORMATION -->
+
+        <div class="restaurant-box">
+
+            <div class="restaurant-avatar">
+
+                {{ (restaurant_name or "R")[0]|upper }}
+
+            </div>
+
+
+            <div class="restaurant-info">
+
+                <h3>
+                    {{ restaurant_name or "Restaurant" }}
+                </h3>
+
+                <span>
+                    Restaurant Owner
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a href="{{ url_for('admin_dashboard') }}"
+               class="nav-item">
+
+                <span class="nav-icon">
+                    📊
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+
+            <a href="{{ url_for('admin_add_food_page') }}"
+               class="nav-item">
+
+                <span class="nav-icon">
+                    ➕
+                </span>
+
+                <span>
+                    Add Menu Item
+                </span>
+
+            </a>
+
+
+
+            <a href="{{ url_for('edit_food_page') }}"
+               class="nav-item active">
+
+                <span class="nav-icon">
+                    ✏️
+                </span>
+
+                <span>
+                    Manage Menu
+                </span>
+
+            </a>
+
+
+
+            <a href="{{ url_for('view_orders_page') }}"
+               class="nav-item">
+
+                <span class="nav-icon">
+                    🛒
+                </span>
+
+                <span>
+                    Orders
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn"
+                    onclick="logoutAdmin()">
+
+                <span>
+                    🚪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <button class="mobile-menu-btn"
+                        onclick="toggleSidebar()">
+                    ☰
+                </button>
+
+                <div>
+
+                    <h1>
+                        Manage Menu
+                    </h1>
+
+                    <p>
+                        Edit, update or remove items from your menu
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <a href="{{ url_for('admin_add_food_page') }}"
+                   class="primary-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    Add New Item
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Your Menu Items</h2>
+                    <p>Every item currently listed on your restaurant's menu</p>
+                </div>
+
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+
+                <div class="menu-loading">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    Loading menu items...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+            <p>© 2026 FoodHub Restaurant Management System</p>
+            <span>Multi-Restaurant Admin Dashboard</span>
+        </footer>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         EDIT ITEM MODAL
+    ====================================================== -->
+
+    <div class="modal-overlay" id="editModalOverlay">
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-pen"></i> Edit Menu Item</h2>
+                <button type="button" class="modal-close-btn" id="modalCloseBtn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="editFoodForm" class="modal-form">
+
+                <input type="hidden" id="editFoodId">
+
+                <div class="form-group">
+                    <label for="editName">Food Name</label>
+                    <input type="text" id="editName" required>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="editCategory">Category</label>
+                        <select id="editCategory" required>
+                            <option value="Pizza">Pizza</option>
+                            <option value="Burger">Burger</option>
+                            <option value="Biryani">Biryani</option>
+                            <option value="Dosa">Dosa</option>
+                            <option value="Juice">Juice</option>
+                            <option value="Ice Cream">Ice Cream</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Dessert">Dessert</option>
+                            <option value="Drinks">Drinks</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editPrice">Price (₹)</label>
+                        <input type="number" id="editPrice" min="0" step="0.01" required>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="editDescription">Description</label>
+                    <textarea id="editDescription" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editImage">Replace Image (optional)</label>
+                    <input type="file" id="editImage" accept="image/*">
+                </div>
+
+                <div class="form-group form-checkbox">
+                    <label>
+                        <input type="checkbox" id="editAvailable">
+                        Available on the menu
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+
+                    <button type="button" class="cancel-btn" id="modalCancelBtn">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="save-btn" id="editSaveBtn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/admin_common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/edit_food.js') }}"></script>
+
+
+</body>
+
+</html>

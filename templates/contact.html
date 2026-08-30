@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FoodHub | Contact</title>
+
+    <link rel="stylesheet" href="../static/css/contact.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <img src="../static/images/logo.png" alt="Logo">
+
+            <h2>FoodHub</h2>
+
+        </div>
+
+        <ul>
+
+            <li><a href="home.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="offers.html">Offers</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+
+        </ul>
+
+    </nav>
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact">
+
+        <h1>Contact Us</h1>
+
+        <div class="contact-container">
+
+            <!-- Left -->
+
+            <div class="contact-info">
+
+                <h2>Get In Touch</h2>
+
+                <p><i class="fa-solid fa-location-dot"></i> Dharmapuri, Tamil Nadu</p>
+
+                <p><i class="fa-solid fa-phone"></i> +91 9787712948</p>
+
+                <p><i class="fa-solid fa-envelope"></i> periyasamymuthusamy442@gmail.com</p>
+
+                <p><i class="fa-solid fa-clock"></i> 9:00 AM - 11:00 PM</p>
+
+            </div>
+
+            <!-- Right -->
+
+            <div class="contact-form">
+
+                <h2>Send Message</h2>
+
+                <form id="contactForm">
+
+                    <input type="text" id="contactName" placeholder="Your Name" required>
+
+                    <input type="email" id="contactEmail" placeholder="Your Email" required>
+
+                    <textarea id="contactMessage" rows="6" placeholder="Your Message" required></textarea>
+
+                    <button type="submit" id="contactSubmitBtn">
+                        Send Message
+                    </button>
+
+                    <p id="contactStatusMsg" class="contact-status-msg"></p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script src="../static/js/contact.js"></script>
+
+</body>
+
+</html>

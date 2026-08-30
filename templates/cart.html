@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FoodHub | Cart</title>
+
+    <link rel="stylesheet" href="../static/css/cart.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <img src="../static/images/logo.png" alt="Logo">
+
+            <h2>FoodHub</h2>
+
+        </div>
+
+        <ul>
+
+            <li><a href="home.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="cart.html" class="active">Cart</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="contact.html">Contact</a></li>
+
+        </ul>
+
+    </nav>
+
+    <!-- ================= CART ================= -->
+
+    <section class="cart-container">
+
+        <div class="cart-left">
+
+            <h1>🛒 My Cart</h1>
+
+            <div id="cartItems">
+
+                <!-- JavaScript will display cart items here -->
+
+            </div>
+
+        </div>
+
+        <!-- ================= BILL ================= -->
+
+        <div class="bill">
+
+            <h2>Bill Details</h2>
+
+            <div class="bill-row">
+
+                <span>Item Total</span>
+
+                <span id="itemTotal">₹0</span>
+
+            </div>
+
+            <div class="bill-row">
+
+                <span>GST</span>
+
+                <span>₹20</span>
+
+            </div>
+
+            <div class="bill-row">
+
+                <span>Delivery Charge</span>
+
+                <span>₹40</span>
+
+            </div>
+
+            <hr>
+
+            <div class="bill-row total">
+
+                <span>Grand Total</span>
+
+                <span id="grandTotal">₹0</span>
+
+            </div>
+
+            <button class="checkout-btn" onclick="checkout()">
+
+                Proceed To Payment
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ================= JS ================= -->
+
+    <script src="../static/js/cart.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Restaurant Admin Dashboard - FoodHub</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <img src="{{ url_for('static', filename='images/logo.png') }}"
+                     alt="FoodHub Logo">
+            </div>
+
+            <div>
+
+                <h2>
+                    FoodHub
+                </h2>
+
+                <span>
+                    Restaurant Admin
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RESTAURANT INFORMATION -->
+
+        <div class="restaurant-box">
+
+            <div class="restaurant-avatar">
+
+                {{ (restaurant_name or "R")[0]|upper }}
+
+            </div>
+
+
+            <div class="restaurant-info">
+
+                <h3>
+                    {{ restaurant_name or "Restaurant" }}
+                </h3>
+
+                <span>
+                    Restaurant Owner
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a href="{{ url_for('admin_dashboard') }}"
+               class="nav-item active">
+
+                <span class="nav-icon">
+                    📊
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+
+            <a href="{{ url_for('admin_add_food_page') }}"
+               class="nav-item">
+
+                <span class="nav-icon">
+                    ➕
+                </span>
+
+                <span>
+                    Add Menu Item
+                </span>
+
+            </a>
+
+
+
+            <a href="{{ url_for('edit_food_page') }}"
+               class="nav-item">
+
+                <span class="nav-icon">
+                    ✏️
+                </span>
+
+                <span>
+                    Manage Menu
+                </span>
+
+            </a>
+
+
+
+            <a href="{{ url_for('view_orders_page') }}"
+               class="nav-item">
+
+                <span class="nav-icon">
+                    🛒
+                </span>
+
+                <span>
+                    Orders
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn"
+                    onclick="logoutAdmin()">
+
+                <span>
+                    🚪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP HEADER
+        ================================================== -->
+
+        <header class="top-header">
+
+
+            <div class="header-left">
+
+                <button class="mobile-menu-btn"
+                        onclick="toggleSidebar()">
+
+                    ☰
+
+                </button>
+
+
+                <div>
+
+                    <h1>
+                        Restaurant Dashboard
+                    </h1>
+
+                    <p>
+                        Manage your restaurant and track your business
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="header-right">
+
+                <div class="owner-profile">
+
+
+                    <div class="owner-avatar">
+
+                        {{ (restaurant_name or "R")[0]|upper }}
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ restaurant_name or "Restaurant Owner" }}
+                        </strong>
+
+                        <small>
+                            Owner
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             WELCOME SECTION
+        ================================================== -->
+
+        <section class="welcome-section">
+
+
+            <div>
+
+                <span class="welcome-label">
+                    Welcome back 👋
+                </span>
+
+
+                <h2>
+                    {{ restaurant_name or "Your Restaurant" }}
+                </h2>
+
+
+                <p>
+                    Here's what's happening with your restaurant today.
+                </p>
+
+            </div>
+
+
+
+            <div class="date-box">
+
+                <span>
+                    📅
+                </span>
+
+
+                <div>
+
+                    <strong id="currentDate">
+                        Loading...
+                    </strong>
+
+                    <small>
+                        Today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             ANALYTICS
+        ================================================== -->
+
+        <section class="analytics-grid">
+
+
+            <!-- TOTAL ORDERS -->
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon orders-icon">
+                    🛒
+                </div>
+
+
+                <div class="analytics-content">
+
+                    <span>
+                        Total Orders
+                    </span>
+
+                    <h3 id="totalOrders">
+
+                        {{ analytics.total_orders or 0 }}
+
+                    </h3>
+
+                    <small>
+                        Orders received
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- REVENUE -->
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon revenue-icon">
+                    💰
+                </div>
+
+
+                <div class="analytics-content">
+
+                    <span>
+                        Total Revenue
+                    </span>
+
+
+                    <h3>
+
+                        ₹<span id="totalRevenue">
+
+                            {{ "%.2f"|format(
+                                analytics.total_revenue or 0
+                            ) }}
+
+                        </span>
+
+                    </h3>
+
+
+                    <small>
+                        Restaurant revenue
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ITEMS SOLD -->
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon items-icon">
+                    🍔
+                </div>
+
+
+                <div class="analytics-content">
+
+                    <span>
+                        Items Sold
+                    </span>
+
+
+                    <h3 id="totalItemsSold">
+
+                        {{ analytics.total_items_sold or 0 }}
+
+                    </h3>
+
+
+                    <small>
+                        Food items sold
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MENU ITEMS -->
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon menu-icon">
+                    📋
+                </div>
+
+
+                <div class="analytics-content">
+
+                    <span>
+                        Menu Items
+                    </span>
+
+
+                    <h3 id="totalMenuItems">
+
+                        {{ analytics.total_menu_items or 0 }}
+
+                    </h3>
+
+
+                    <small>
+                        Active menu items
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+        ================================================== -->
+
+        <section class="quick-actions-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Manage your restaurant quickly
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="quick-actions">
+
+
+                <!-- ADD FOOD -->
+
+                <a href="{{ url_for('admin_add_food_page') }}"
+                   class="quick-action add-action">
+
+
+                    <div class="quick-action-icon">
+                        ➕
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Add Menu Item
+                        </h3>
+
+                        <p>
+                            Add a new food item
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+
+                </a>
+
+
+
+                <!-- MANAGE MENU -->
+
+                <a href="{{ url_for('edit_food_page') }}"
+                   class="quick-action edit-action">
+
+
+                    <div class="quick-action-icon">
+                        ✏️
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Manage Menu
+                        </h3>
+
+                        <p>
+                            Edit or remove food items
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+
+                </a>
+
+
+
+                <!-- ORDERS -->
+
+                <a href="{{ url_for('view_orders_page') }}"
+                   class="quick-action orders-action">
+
+
+                    <div class="quick-action-icon">
+                        📦
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            View Orders
+                        </h3>
+
+                        <p>
+                            Check restaurant orders
+                        </p>
+
+                    </div>
+
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECENT ORDERS
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <h2>
+                        Recent Orders
+                    </h2>
+
+                    <p>
+                        Orders received by your restaurant
+                    </p>
+
+                </div>
+
+
+
+                <a href="{{ url_for('view_orders_page') }}"
+                   class="view-all-btn">
+
+                    View All →
+
+                </a>
+
+
+            </div>
+
+
+
+            <div class="table-container">
+
+
+                <table class="orders-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Order ID
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Items
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Payment
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="ordersTableBody">
+
+
+                        {% if orders %}
+
+
+                            {% for order in orders[:8] %}
+
+                                {# =====================================
+                                   RESTAURANT ORDER TOTAL
+                                ====================================== #}
+
+                                {% set ns = namespace(
+                                    restaurant_total=0,
+                                    restaurant_items=[]
+                                ) %}
+
+
+                                {% for item in order.get('items', []) %}
+
+                                    {% if
+                                        item.get('restaurant_id')|string
+                                        ==
+                                        session.get('restaurant_id')|string
+                                    %}
+
+
+                                        {% set quantity =
+                                            item.get('quantity', 1)|int
+                                        %}
+
+
+                                        {% set price =
+                                            item.get('price', 0)|float
+                                        %}
+
+
+                                        {% set ns.restaurant_total =
+                                            ns.restaurant_total
+                                            +
+                                            (price * quantity)
+                                        %}
+
+
+                                        {% set ns.restaurant_items =
+                                            ns.restaurant_items
+                                            +
+                                            [
+                                                {
+                                                    'name':
+                                                        item.get(
+                                                            'name',
+                                                            'Food Item'
+                                                        ),
+                                                    'quantity':
+                                                        quantity
+                                                }
+                                            ]
+                                        %}
+
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+
+
+                                <!-- ORDER ROW -->
+
+                                <tr>
+
+
+                                    <!-- ORDER ID -->
+
+                                    <td>
+
+                                        <strong class="order-id">
+
+                                            #{{ order.get('_id', '')|string|truncate(
+                                                8,
+                                                True,
+                                                ''
+                                            ) }}
+
+                                        </strong>
+
+                                    </td>
+
+
+                                    <!-- CUSTOMER -->
+
+                                    <td>
+
+                                        <div class="customer-cell">
+
+                                            <strong>
+                                                {{ order.get('customer_name') or '-' }}
+                                            </strong>
+
+                                            {% if order.get('customer_phone') %}
+                                            <small>
+                                                {{ order.get('customer_phone') }}
+                                            </small>
+                                            {% endif %}
+
+                                        </div>
+
+                                    </td>
+
+
+
+                                    <!-- ITEMS -->
+
+                                    <td>
+
+                                        <div class="order-items">
+
+
+                                            {% if ns.restaurant_items %}
+
+
+                                                {% for restaurant_item
+                                                      in ns.restaurant_items %}
+
+
+                                                    <span class="item-name">
+
+                                                        {{ restaurant_item.name }}
+
+                                                        ×
+
+                                                        {{ restaurant_item.quantity }}
+
+                                                    </span>
+
+
+                                                {% endfor %}
+
+
+                                            {% else %}
+
+                                                <span class="item-name">
+                                                    No items
+                                                </span>
+
+                                            {% endif %}
+
+
+                                        </div>
+
+                                    </td>
+
+
+
+                                    <!-- AMOUNT -->
+
+                                    <td>
+
+                                        <strong class="amount">
+
+                                            ₹{{ "%.2f"|format(
+                                                ns.restaurant_total
+                                            ) }}
+
+                                        </strong>
+
+                                    </td>
+
+
+
+                                    <!-- PAYMENT -->
+
+                                    <td>
+
+                                        <span class="payment-method">
+
+                                            {{ order.get(
+                                                'payment_method',
+                                                'Cash On Delivery'
+                                            ) }}
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- STATUS -->
+
+                                    <td>
+
+
+                                        {% set status =
+                                            order.get(
+                                                'status',
+                                                'Preparing'
+                                            )
+                                        %}
+
+
+                                        <span class="status-badge
+                                            {% if status == 'Delivered' %}
+                                                delivered
+                                            {% elif status == 'Out for Delivery' %}
+                                                out-delivery
+                                            {% elif status == 'Cancelled' %}
+                                                cancelled
+                                            {% else %}
+                                                preparing
+                                            {% endif %}
+                                        ">
+
+                                            {{ status }}
+
+                                        </span>
+
+
+                                    </td>
+
+
+
+                                    <!-- DATE -->
+
+                                    <td>
+
+
+                                        {% if order.get('created_at') %}
+
+
+                                            {{ order.get(
+                                                'created_at'
+                                            ).strftime(
+                                                '%d %b %Y'
+                                            ) }}
+
+
+                                        {% else %}
+
+                                            -
+
+                                        {% endif %}
+
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            {% endfor %}
+
+
+                        {% else %}
+
+
+                            <!-- NO ORDERS -->
+
+                            <tr>
+
+                                <td colspan="7"
+                                    class="empty-state">
+
+
+                                    <div class="empty-icon">
+                                        📦
+                                    </div>
+
+
+                                    <h3>
+                                        No Orders Yet
+                                    </h3>
+
+
+                                    <p>
+                                        Your restaurant orders will appear here.
+                                    </p>
+
+
+                                </td>
+
+                            </tr>
+
+
+                        {% endif %}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+        <!-- =================================================
+             SECURITY
+        ================================================== -->
+
+        <section class="security-card">
+
+
+            <div class="security-icon">
+                🔐
+            </div>
+
+
+            <div class="security-content">
+
+                <h3>
+                    Your Restaurant Data is Private
+                </h3>
+
+                <p>
+                    Menu items, orders and analytics displayed here
+                    belong exclusively to your restaurant account.
+                </p>
+
+            </div>
+
+
+            <div class="secure-badge">
+
+                ✓ Secure
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="dashboard-footer">
+
+
+            <p>
+                © 2026 FoodHub Restaurant Management System
+            </p>
+
+
+            <span>
+                Multi-Restaurant Admin Dashboard
+            </span>
+
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           CURRENT DATE
+        ====================================================== */
+
+        function displayCurrentDate() {
+
+
+            const dateElement =
+                document.getElementById(
+                    "currentDate"
+                );
+
+
+            if (!dateElement) {
+                return;
+            }
+
+
+            const now =
+                new Date();
+
+
+            const options = {
+
+                weekday: "long",
+
+                year: "numeric",
+
+                month: "long",
+
+                day: "numeric"
+
+            };
+
+
+            dateElement.textContent =
+                now.toLocaleDateString(
+                    "en-IN",
+                    options
+                );
+
+
+        }
+
+
+
+        /* =====================================================
+           ADMIN SESSION CHECK
+        ====================================================== */
+
+        async function checkAdminSession() {
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        "{{ url_for('api_admin_session') }}",
+                        {
+                            method: "GET",
+                            credentials: "same-origin",
+                            cache: "no-store"
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+
+                    console.error(
+                        "Session API error:",
+                        response.status
+                    );
+
+
+                    return false;
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Admin session:",
+                    data
+                );
+
+
+                if (!data.logged_in) {
+
+
+                    window.location.href =
+                        "{{ url_for('admin_login') }}";
+
+
+                    return false;
+
+                }
+
+
+                return true;
+
+
+            } catch (error) {
+
+
+                console.error(
+                    "Session check error:",
+                    error
+                );
+
+
+                return false;
+
+            }
+
+
+        }
+
+
+
+        /* =====================================================
+           LOGOUT
+        ====================================================== */
+
+        async function logoutAdmin() {
+
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        "{{ url_for('api_admin_logout') }}",
+                        {
+
+                            method: "POST",
+
+                            credentials: "same-origin",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            }
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Logout response:",
+                    data
+                );
+
+
+                if (data.success) {
+
+
+                    window.location.href =
+                        "{{ url_for('admin_login') }}";
+
+
+                } else {
+
+
+                    alert(
+                        data.message ||
+                        "Logout failed."
+                    );
+
+                }
+
+
+            } catch (error) {
+
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to logout. Please try again."
+                );
+
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           MOBILE SIDEBAR
+        ====================================================== */
+
+        function toggleSidebar() {
+
+
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
+
+
+            if (!sidebar) {
+                return;
+            }
+
+
+            sidebar.classList.toggle(
+                "mobile-open"
+            );
+
+
+        }
+
+
+
+        /* =====================================================
+           CLOSE MOBILE SIDEBAR
+        ====================================================== */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+
+                const sidebar =
+                    document.getElementById(
+                        "sidebar"
+                    );
+
+
+                const menuButton =
+                    document.querySelector(
+                        ".mobile-menu-btn"
+                    );
+
+
+                if (!sidebar ||
+                    !menuButton) {
+
+                    return;
+
+                }
+
+
+                if (
+
+                    window.innerWidth <= 900 &&
+
+                    !sidebar.contains(
+                        event.target
+                    ) &&
+
+                    !menuButton.contains(
+                        event.target
+                    )
+
+                ) {
+
+
+                    sidebar.classList.remove(
+                        "mobile-open"
+                    );
+
+
+                }
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           PAGE LOAD
+        ====================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+
+                displayCurrentDate();
+
+
+                await checkAdminSession();
+
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

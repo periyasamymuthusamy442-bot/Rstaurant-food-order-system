@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Help & Support - FoodHub</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/home.css') }}">
+
+    <style>
+
+        .help-page {
+            min-height: calc(100vh - 90px);
+            background: #f7f7f7;
+            padding: 50px 20px;
+        }
+
+        .help-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .help-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .help-subtitle {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .help-card {
+            background: #ffffff;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.07);
+
+            transition: 0.25s ease;
+        }
+
+        .help-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .help-card i {
+            font-size: 32px;
+            color: #ff6b00;
+            margin-bottom: 18px;
+        }
+
+        .help-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .help-card p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 700px) {
+
+            .help-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <a href="{{ url_for('home_page') }}"
+               class="logo">
+
+                <img src="{{ url_for('static', filename='images/logo.png') }}"
+                     alt="FoodHub Logo">
+
+                <span class="logo-text">
+                    Food<span>Hub</span>
+                </span>
+
+            </a>
+
+
+            <ul class="nav-menu">
+
+                <li>
+                    <a href="{{ url_for('home_page') }}">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('menu_page') }}">
+                        Menu
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('cart_page') }}">
+                        Cart
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('offers_page') }}">
+                        Offers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('orders_page') }}">
+                        Orders
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('contact_page') }}">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= HELP ================= -->
+
+    <main class="help-page">
+
+        <div class="help-container">
+
+            <h1 class="help-title">
+
+                <i class="fa-regular fa-circle-question"></i>
+
+                Help & Support
+
+            </h1>
+
+
+            <p class="help-subtitle">
+                How can we help you today?
+            </p>
+
+
+            <div class="help-grid">
+
+
+                <!-- ORDER HELP -->
+
+                <div class="help-card">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    <h3>
+                        Order Help
+                    </h3>
+
+                    <p>
+                        Need help with your order?
+                        Check your order status and
+                        delivery information.
+                    </p>
+
+                </div>
+
+
+                <!-- PAYMENT HELP -->
+
+                <div class="help-card">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                    <h3>
+                        Payment Help
+                    </h3>
+
+                    <p>
+                        Having problems with payment?
+                        Check your payment details
+                        and try again.
+                    </p>
+
+                </div>
+
+
+                <!-- CONTACT SUPPORT -->
+
+                <div class="help-card">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                    <h3>
+                        Contact Support
+                    </h3>
+
+                    <p>
+                        For further assistance,
+                        contact the FoodHub support
+                        team.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

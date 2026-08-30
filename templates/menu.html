@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FoodHub Menu</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/home.css') }}">
+
+    <!-- Menu CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/menu.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <!-- LOGO -->
+
+            <a href="{{ url_for('home_page') }}"
+               class="logo"
+               aria-label="FoodHub Home">
+
+                <img src="{{ url_for('static', filename='images/logo.png') }}"
+                     alt="FoodHub Logo">
+
+                <span class="logo-text">
+                    Food<span>Hub</span>
+                </span>
+
+            </a>
+
+
+            <!-- LOCATION
+                 Hidden on Menu page to match Cart navbar
+            -->
+
+            <div class="location-box">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <div class="location-content">
+                    <span class="location-label">Delivering to</span>
+                    <strong>Your Location</strong>
+                </div>
+
+                <i class="fa-solid fa-chevron-down location-arrow"></i>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <ul class="nav-menu">
+
+                <li>
+                    <a href="{{ url_for('home_page') }}">
+                        Home
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{{ url_for('menu_page') }}"
+                       class="active">
+                        Menu
+                    </a>
+                </li>
+
+
+                <!-- CART -->
+
+                <li>
+                    <a href="{{ url_for('cart_page') }}">
+                        Cart
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{{ url_for('offers_page') }}">
+                        Offers
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{{ url_for('orders_page') }}">
+                        Orders
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{{ url_for('contact_page') }}">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <!-- NAV ACTIONS
+                 Kept for functionality but hidden visually
+                 because Cart navbar design has only text navigation.
+            -->
+
+            <div class="nav-actions">
+
+                <a href="{{ url_for('cart_page') }}"
+                   class="nav-icon-btn cart-btn"
+                   title="Cart"
+                   aria-label="Shopping Cart">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <span class="cart-count"
+                          id="cartCount">0</span>
+
+                </a>
+
+
+                {% if session.get('user_id') %}
+
+                <div class="account-wrapper"
+                     id="accountWrapper">
+
+                    <button type="button"
+                            class="account-btn"
+                            id="accountBtn"
+                            aria-expanded="false"
+                            aria-label="Open account menu">
+
+                        <span class="account-letter">
+                            {{ session.get('user_name', 'U')[0]|upper }}
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </button>
+
+
+                    <div class="profile-menu"
+                         id="profileMenu">
+
+                        <div class="profile-header">
+
+                            <div class="profile-avatar">
+                                {{ session.get('user_name', 'U')[0]|upper }}
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    {{ session.get('user_name', 'User') }}
+                                </strong>
+
+                                <span>
+                                    FoodHub Customer
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-divider"></div>
+
+
+                        <a href="{{ url_for('orders_page') }}"
+                           class="profile-item">
+
+                            <i class="fa-solid fa-bag-shopping"></i>
+
+                            <span>
+                                My Orders
+                            </span>
+
+                        </a>
+
+
+                        <a href="{{ url_for('offers_page') }}"
+                           class="profile-item">
+
+                            <i class="fa-solid fa-tag"></i>
+
+                            <span>
+                                Offers
+                            </span>
+
+                        </a>
+
+
+                        <a href="{{ url_for('contact_page') }}"
+                           class="profile-item">
+
+                            <i class="fa-solid fa-headset"></i>
+
+                            <span>
+                                Contact
+                            </span>
+
+                        </a>
+
+
+                        <div class="profile-divider"></div>
+
+
+                        <a href="#"
+                           id="logoutBtn"
+                           class="profile-item logout-item">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            <span>
+                                Logout
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                {% else %}
+
+                <a href="{{ url_for('login_page') }}"
+                   class="login-btn">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Login
+
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ================= SEARCH ================= -->
+
+    <section class="search">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search Food..."
+        >
+
+    </section>
+
+
+
+    <!-- ================= CATEGORY ================= -->
+
+    <section class="category">
+
+        <button type="button">
+            All
+        </button>
+
+        <button type="button">
+            Pizza
+        </button>
+
+        <button type="button">
+            Burger
+        </button>
+
+        <button type="button">
+            Biryani
+        </button>
+
+        <button type="button">
+            Dosa
+        </button>
+
+        <button type="button">
+            Juice
+        </button>
+
+        <button type="button">
+            Ice Cream
+        </button>
+
+    </section>
+
+
+
+    <!-- ================= FOOD ITEMS ================= -->
+
+    <!--
+        Food cards are dynamically loaded
+        from MongoDB through menu.js
+    -->
+
+    <section class="food-container">
+    </section>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+        // Real, server-verified login state (Flask session).
+        // Do NOT rely on localStorage for this - it was never
+        // being set anywhere, which caused "Please Login First"
+        // to show even for logged-in users.
+        window.IS_LOGGED_IN = {{ 'true' if session.get('user_id') else 'false' }};
+    </script>
+
+    <script src="{{ url_for('static', filename='js/home.js') }}?v=2"></script>
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}?v=2"></script>
+
+</body>
+
+</html>

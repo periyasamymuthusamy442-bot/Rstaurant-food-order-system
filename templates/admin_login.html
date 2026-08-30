@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodHub - Restaurant Admin Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_login.css') }}">
+
+</head>
+
+
+<body>
+
+    <div class="login-page">
+
+        <div class="login-card">
+
+
+            <!-- ==============================
+                 LOGO
+            =============================== -->
+
+            <div class="login-logo">
+                🍴
+            </div>
+
+
+            <!-- ==============================
+                 TITLE
+            =============================== -->
+
+            <h1>
+                FoodHub
+            </h1>
+
+            <p class="login-subtitle">
+                Restaurant Admin Portal
+            </p>
+
+
+            <!-- ==============================
+                 FLASH MESSAGE
+            =============================== -->
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="flash-message {{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- ==============================
+                 LOGIN FORM
+            =============================== -->
+
+            <!--
+                IMPORTANT:
+                Flask endpoint is admin_login
+                NOT admin_login_page
+            -->
+
+            <form method="POST"
+                  action="{{ url_for('admin_login') }}"
+                  class="login-form">
+
+
+                <!-- ==========================
+                     USERNAME
+                =========================== -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter restaurant username"
+                        required
+                        autocomplete="username"
+                    >
+
+                </div>
+
+
+                <!-- ==========================
+                     PASSWORD
+                =========================== -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <!-- ==========================
+                     LOGIN BUTTON
+                =========================== -->
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    <span>
+                        🔐
+                    </span>
+
+                    Login to Dashboard
+
+                </button>
+
+            </form>
+
+
+            <!-- ==============================
+                 BACK TO CUSTOMER LOGIN
+            =============================== -->
+
+            <div
+                class="back-login"
+                style="
+                    text-align:center;
+                    margin-top:18px;
+                ">
+
+                <a
+                    href="{{ url_for('login_page') }}"
+                    style="
+                        color:#ff6600;
+                        text-decoration:none;
+                        font-weight:600;
+                    ">
+
+                    ← Back to Customer Login
+
+                </a>
+
+            </div>
+
+
+            <!-- ==============================
+                 INFO
+            =============================== -->
+
+            <div class="login-info">
+
+                <div class="info-icon">
+                    🏪
+                </div>
+
+                <div>
+
+                    <strong>
+                        Restaurant Owner Access
+                    </strong>
+
+                    <p>
+                        Login using your restaurant
+                        admin credentials.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==============================
+                 DEMO DETAILS
+            =============================== -->
+
+            <div class="demo-box">
+
+                <h3>
+                    Demo Login
+                </h3>
+
+                <p>
+                    Username:
+                    <strong>restaurant1</strong>
+                </p>
+
+                <p>
+                    Password:
+                    <strong>admin123</strong>
+                </p>
+
+            </div>
+
+
+            <!-- ==============================
+                 FOOTER
+            =============================== -->
+
+            <div class="login-footer">
+
+                <span>
+                    © 2026 FoodHub
+                </span>
+
+                <span>
+                    Restaurant Management System
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

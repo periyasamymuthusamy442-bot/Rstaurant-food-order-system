@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings - FoodHub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/home.css') }}">
+
+    <style>
+
+        .settings-page {
+            font-family: 'Poppins', Arial, sans-serif;
+            min-height: calc(100vh - 90px);
+            background: #f7f7f9;
+            padding: 50px 20px;
+        }
+
+        .settings-container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .settings-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 6px;
+        }
+
+        .settings-subtitle {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .settings-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px 26px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+        }
+
+        .settings-card h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-card h2 i {
+            color: #ff512f;
+        }
+
+        .settings-card p.hint {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .settings-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+        .settings-form input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e2e2e2;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            font-family: inherit;
+        }
+
+        .settings-form input:focus {
+            outline: none;
+            border-color: #ff512f;
+        }
+
+        .settings-form input[disabled] {
+            background: #f2f2f2;
+            color: #999;
+        }
+
+        .settings-save-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            background: #ff512f;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .settings-save-btn:hover {
+            background: #e8431f;
+        }
+
+        .settings-save-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .settings-msg {
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .settings-msg.success {
+            color: #16a34a;
+            display: block;
+        }
+
+        .settings-msg.error {
+            color: #dc2626;
+            display: block;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR (shared with Home) ================= -->
+
+    <header class="site-header">
+
+        <div class="navbar">
+
+            <a href="/home.html" class="brand">
+
+                <div class="brand-logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FoodHub Logo">
+                </div>
+
+                <div class="brand-text">
+                    <span class="brand-name">FoodHub</span>
+                    <span class="brand-tagline">Taste. Order. Enjoy.</span>
+                </div>
+
+            </a>
+
+            <nav class="main-nav">
+                <a href="/home.html" class="nav-link">Home</a>
+                <a href="/home.html#restaurants" class="nav-link">Restaurants</a>
+                <a href="/menu.html" class="nav-link">Menu</a>
+                <a href="/offers.html" class="nav-link">Offers</a>
+                <a href="/orders.html" class="nav-link">Orders</a>
+                <a href="/contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <a href="/cart.html" class="icon-btn cart-btn" aria-label="Shopping cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cartCount">0</span>
+                </a>
+
+                <div class="account-wrapper" id="accountWrapper">
+
+                    <button class="profile-btn" id="accountBtn" type="button" aria-label="Account">
+                        <span id="accountLetter">
+                            {{ session.get('user_name', 'U')[0]|upper }}
+                        </span>
+                    </button>
+
+                    <div class="profile-menu" id="profileMenu">
+
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                {{ session.get('user_name', 'U')[0]|upper }}
+                            </div>
+                            <div class="profile-user-info">
+                                <strong>{{ session.get('user_name', 'User') }}</strong>
+                                <span>FoodHub Customer</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-divider"></div>
+
+                        <a href="{{ url_for('profile_page') }}" class="profile-item">
+                            <i class="fa-regular fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+
+                        <a href="{{ url_for('orders_page') }}" class="profile-item">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span>My Orders</span>
+                        </a>
+
+                        <a href="{{ url_for('settings_page') }}" class="profile-item">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Settings</span>
+                        </a>
+
+                        <a href="{{ url_for('help_page') }}" class="profile-item">
+                            <i class="fa-regular fa-circle-question"></i>
+                            <span>Help & Support</span>
+                        </a>
+
+                        <div class="profile-divider"></div>
+
+                        <a href="#" id="logoutBtn" class="profile-item logout-item">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Logout</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= SETTINGS ================= -->
+
+    <main class="settings-page">
+
+        <div class="settings-container">
+
+            <h1 class="settings-title">Settings</h1>
+            <p class="settings-subtitle">Manage your account details and password.</p>
+
+            <!-- ACCOUNT INFO -->
+            <section class="settings-card">
+
+                <h2><i class="fa-regular fa-user"></i> Account Info</h2>
+                <p class="hint">Update your name and mobile number.</p>
+
+                <form id="profileForm" class="settings-form">
+
+                    <label for="settingsName">Full Name</label>
+                    <input type="text" id="settingsName"
+                           value="{{ session.get('user_name', '') }}" required>
+
+                    <label for="settingsEmail">Email</label>
+                    <input type="email" id="settingsEmail"
+                           value="{{ session.get('user_email', '') }}" disabled>
+
+                    <label for="settingsMobile">Mobile Number</label>
+                    <input type="text" id="settingsMobile" maxlength="10"
+                           placeholder="10-digit mobile number">
+
+                    <button type="submit" class="settings-save-btn" id="profileSaveBtn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Changes
+                    </button>
+
+                    <div class="settings-msg" id="profileMsg"></div>
+
+                </form>
+
+            </section>
+
+            <!-- PASSWORD -->
+            <section class="settings-card">
+
+                <h2><i class="fa-solid fa-lock"></i> Change Password</h2>
+                <p class="hint">Choose a new password with at least 6 characters.</p>
+
+                <form id="passwordForm" class="settings-form">
+
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" required>
+
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" required>
+
+                    <button type="submit" class="settings-save-btn" id="passwordSaveBtn">
+                        <i class="fa-solid fa-key"></i>
+                        Update Password
+                    </button>
+
+                    <div class="settings-msg" id="passwordMsg"></div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+
+</body>
+
+</html>

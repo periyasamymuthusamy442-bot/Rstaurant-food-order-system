@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodHub | Customer Login</title>
+
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+
+    <div class="login-box">
+
+
+        <!-- =================================================
+             LOGO
+        ================================================== -->
+
+        <div class="logo-wrapper">
+
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                 alt="FoodHub Logo">
+
+        </div>
+
+
+
+        <!-- =================================================
+             HEADING
+        ================================================== -->
+
+        <h1>
+
+            Welcome Back
+
+        </h1>
+
+
+        <p class="subtitle">
+
+            Sign in to continue to FoodHub
+
+        </p>
+
+
+
+        <!-- =================================================
+             ERROR MESSAGE
+        ================================================== -->
+
+        <div class="login-error"
+             id="loginError"
+             style="display: none;">
+
+            <i class="fa-solid fa-circle-exclamation"></i>
+
+            <span id="loginErrorText"></span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOGIN FORM
+        ================================================== -->
+
+        <form id="loginForm">
+
+
+            <!-- EMAIL -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-envelope"></i>
+
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email Address"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    required
+                >
+
+
+                <i
+                    class="fa-solid fa-eye"
+                    id="togglePassword"
+                    style="cursor: pointer;">
+                </i>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REMEMBER / FORGOT
+            ================================================== -->
+
+            <div class="options">
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                        name="remember"
+                    >
+
+                    <span>
+
+                        Remember Me
+
+                    </span>
+
+                </label>
+
+
+                <a href="#"
+                   id="forgotPassword">
+
+                    Forgot Password?
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CUSTOMER LOGIN
+            ================================================== -->
+
+            <button
+                type="submit"
+                id="customerLogin"
+                class="customer-btn">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Customer Login
+
+            </button>
+
+
+
+            <!-- =================================================
+                 ADMIN LOGIN
+            ================================================== -->
+
+            <button
+                type="button"
+                class="admin-btn"
+                onclick="window.location.href='{{ url_for('admin_login') }}'">
+
+                <i class="fa-solid fa-user-shield"></i>
+
+                Admin Login
+
+            </button>
+
+
+
+            <!-- =================================================
+                 REGISTER
+            ================================================== -->
+
+            <div class="register">
+
+
+                <span>
+
+                    Don't have an account?
+
+                </span>
+
+
+                <a href="{{ url_for('register_page') }}">
+
+                    Create Account
+
+                </a>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     LOGIN JAVASCRIPT
+========================================================= -->
+
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+
+
+<!-- =========================================================
+     FALLBACK LOGIN SCRIPT
+
+     login.js-la login logic already irundhaalum,
+     idhu basic API login handle pannum.
+========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+
+    const emailInput =
+        document.getElementById("email");
+
+
+    const passwordInput =
+        document.getElementById("password");
+
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+
+    const errorBox =
+        document.getElementById("loginError");
+
+
+    const errorText =
+        document.getElementById("loginErrorText");
+
+
+    const loginButton =
+        document.getElementById("customerLogin");
+
+
+
+    /* =====================================================
+       PASSWORD SHOW / HIDE
+    ===================================================== */
+
+    if (togglePassword) {
+
+        togglePassword.addEventListener("click", function () {
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+
+                togglePassword.classList.remove(
+                    "fa-eye"
+                );
+
+                togglePassword.classList.add(
+                    "fa-eye-slash"
+                );
+
+            } else {
+
+                passwordInput.type = "password";
+
+                togglePassword.classList.remove(
+                    "fa-eye-slash"
+                );
+
+                togglePassword.classList.add(
+                    "fa-eye"
+                );
+
+            }
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       SHOW ERROR
+    ===================================================== */
+
+    function showError(message) {
+
+        if (!errorBox || !errorText) {
+            return;
+        }
+
+        errorText.textContent =
+            message || "Login failed.";
+
+        errorBox.style.display = "flex";
+
+    }
+
+
+
+    /* =====================================================
+       HIDE ERROR
+    ===================================================== */
+
+    function hideError() {
+
+        if (!errorBox) {
+            return;
+        }
+
+        errorBox.style.display = "none";
+
+    }
+
+
+
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    if (loginForm) {
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                hideError();
+
+
+                const email =
+                    emailInput.value.trim();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                if (!email || !password) {
+
+                    showError(
+                        "Please enter email and password."
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* BUTTON LOADING */
+
+                loginButton.disabled = true;
+
+                loginButton.innerHTML =
+                    '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
+
+
+
+                try {
+
+
+                    const response =
+                        await fetch(
+                            "/api/login",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    email: email,
+
+                                    password: password
+
+                                })
+
+                            }
+                        );
+
+
+
+                    const result =
+                        await response.json();
+
+
+
+                    /* LOGIN FAILED */
+
+                    if (!response.ok || !result.success) {
+
+                        showError(
+                            result.message ||
+                            "Invalid email or password."
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    /* LOGIN SUCCESS */
+
+                    window.location.href =
+                        "{{ url_for('home_page') }}";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Login Error:",
+                        error
+                    );
+
+
+                    showError(
+                        "Server connection failed. Please try again."
+                    );
+
+
+                } finally {
+
+
+                    loginButton.disabled = false;
+
+
+                    loginButton.innerHTML =
+                        '<i class="fa-solid fa-right-to-bracket"></i> Customer Login';
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       FORGOT PASSWORD
+    ===================================================== */
+
+    const forgotPassword =
+        document.getElementById(
+            "forgotPassword"
+        );
+
+
+    if (forgotPassword) {
+
+        forgotPassword.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+
+                alert(
+                    "Forgot Password feature will be added soon."
+                );
+
+            }
+        );
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>

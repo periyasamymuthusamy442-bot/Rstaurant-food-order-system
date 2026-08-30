@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FoodHub | Find Your Favourite Restaurants</title>
+
+    <!-- Home CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+     HEADER
+========================================================= -->
+
+    <header class="site-header">
+
+        <div class="navbar">
+
+            <!-- LOGO -->
+            <a href="/home.html" class="brand">
+
+                <div class="brand-logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FoodHub Logo">
+                </div>
+
+                <div class="brand-text">
+                    <span class="brand-name">FoodHub</span>
+                    <span class="brand-tagline">Taste. Order. Enjoy.</span>
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+            <nav class="main-nav">
+
+                <a href="/home.html" class="nav-link active">
+                    Home
+                </a>
+
+                <a href="#restaurants" class="nav-link">
+                    Restaurants
+                </a>
+
+                <a href="/menu.html" class="nav-link">
+                    Menu
+                </a>
+
+                <a href="/offers.html" class="nav-link">
+                    Offers
+                </a>
+
+                <a href="/orders.html" class="nav-link">
+                    Orders
+                </a>
+
+                <a href="/contact.html" class="nav-link">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- RIGHT ACTIONS -->
+            <div class="nav-actions">
+
+                <!-- SEARCH ICON -->
+                <button class="icon-btn" id="navSearchBtn" type="button" aria-label="Search restaurants">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </button>
+
+
+                <!-- CART -->
+                <a href="/cart.html" class="icon-btn cart-btn" aria-label="Shopping cart">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <span id="cartCount">0</span>
+
+                </a>
+
+
+                <!-- ACCOUNT -->
+                <div class="account-wrapper" id="accountWrapper">
+
+                    <button class="profile-btn" id="accountBtn" type="button" aria-label="Account">
+                        <span id="accountLetter">
+                            {{ session.get('user_name', 'U')[0]|upper }}
+                        </span>
+
+                    </button>
+
+
+                    <!-- PROFILE DROPDOWN -->
+                    <div class="profile-menu" id="profileMenu">
+
+                        <!-- PROFILE HEADER -->
+                        <div class="profile-header">
+
+                            <div class="profile-avatar">
+                                {{ session.get('user_name', 'U')[0]|upper }}
+                            </div>
+
+                            <div class="profile-user-info">
+
+                                <strong>
+                                    {{ session.get('user_name', 'User') }}
+                                </strong>
+
+                                <span>
+                                    FoodHub Customer
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-divider"></div>
+
+
+                        <!-- MY PROFILE -->
+                        <a href="{{ url_for('profile_page') }}" class="profile-item">
+                            <i class="fa-regular fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+
+                        <!-- MY ORDERS -->
+                        <a href="{{ url_for('orders_page') }}" class="profile-item">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span>My Orders</span>
+                        </a>
+
+
+                        <!-- SETTINGS -->
+                        <a href="{{ url_for('settings_page') }}" class="profile-item">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Settings</span>
+                        </a>
+
+
+                        <!-- HELP & SUPPORT -->
+                        <a href="{{ url_for('help_page') }}" class="profile-item">
+                            <i class="fa-regular fa-circle-question"></i>
+                            <span>Help & Support</span>
+                        </a>
+
+
+                        <div class="profile-divider"></div>
+
+
+                        <!-- LOGOUT -->
+                        <a href="#" id="logoutBtn" class="profile-item logout-item">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            <span>
+                                Logout
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+
+    <!-- =========================================================
+     MAIN
+========================================================= -->
+
+    <main>
+
+
+        <!-- =========================================================
+     PROFESSIONAL HERO SLIDER
+========================================================= -->
+
+        <section class="hero">
+
+            <div class="hero-slider" id="heroSlider">
+
+
+                <!-- SLIDE 1 -->
+                <div class="hero-slide active">
+
+                    <img src="{{ url_for('static', filename='images/restaurant1.jpg') }}"
+                        alt="Food Paradise Restaurant">
+
+                    <div class="hero-overlay"></div>
+
+                    <div class="hero-slide-content">
+
+                        <span class="hero-badge">
+                            <i class="fa-solid fa-star"></i>
+                            TOP RATED
+                        </span>
+
+                        <h1>
+                            Discover Great
+                            <span>Restaurants.</span>
+                        </h1>
+
+                        <p>
+                            Explore trusted restaurants near you
+                            and enjoy delicious meals delivered fresh.
+                        </p>
+
+                        <div class="hero-info">
+
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                4.8 Rating
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                25–35 min
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-bolt"></i>
+                                Fast Delivery
+                            </span>
+
+                        </div>
+
+                        <a href="#restaurants" class="hero-btn">
+
+                            Explore Restaurants
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDE 2 -->
+                <div class="hero-slide">
+
+                    <img src="{{ url_for('static', filename='images/restaurant2.jpg') }}" alt="Spice Garden Restaurant">
+
+                    <div class="hero-overlay"></div>
+
+                    <div class="hero-slide-content">
+
+                        <span class="hero-badge">
+                            <i class="fa-solid fa-fire"></i>
+                            POPULAR
+                        </span>
+
+                        <h1>
+                            Great Taste.
+                            <span>Every Bite.</span>
+                        </h1>
+
+                        <p>
+                            Find popular restaurants and discover
+                            your next favourite dining destination.
+                        </p>
+
+                        <div class="hero-info">
+
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                4.7 Rating
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                20–30 min
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-bolt"></i>
+                                Quick Delivery
+                            </span>
+
+                        </div>
+
+                        <a href="#restaurants" class="hero-btn">
+
+                            View Restaurants
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDE 3 -->
+                <div class="hero-slide">
+
+                    <img src="{{ url_for('static', filename='images/restaurant3.jpg') }}"
+                        alt="Biryani House Restaurant">
+
+                    <div class="hero-overlay"></div>
+
+                    <div class="hero-slide-content">
+
+                        <span class="hero-badge">
+                            <i class="fa-solid fa-crown"></i>
+                            BEST SELLER
+                        </span>
+
+                        <h1>
+                            Your Favourite
+                            <span>Restaurants.</span>
+                        </h1>
+
+                        <p>
+                            Explore top-rated restaurants,
+                            exciting offers and reliable delivery.
+                        </p>
+
+                        <div class="hero-info">
+
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                4.9 Rating
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                25–35 min
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-motorcycle"></i>
+                                Fast Delivery
+                            </span>
+
+                        </div>
+
+                        <a href="#restaurants" class="hero-btn">
+
+                            Discover Now
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDE 4 -->
+                <div class="hero-slide">
+
+                    <img src="{{ url_for('static', filename='images/restaurant4.jpg') }}" alt="Dosa Corner Restaurant">
+
+                    <div class="hero-overlay"></div>
+
+                    <div class="hero-slide-content">
+
+                        <span class="hero-badge">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                            CUSTOMER FAVOURITE
+                        </span>
+
+                        <h1>
+                            Order Easy.
+                            <span>Enjoy More.</span>
+                        </h1>
+
+                        <p>
+                            From local favourites to premium restaurants,
+                            FoodHub brings them closer to you.
+                        </p>
+
+                        <div class="hero-info">
+
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                4.8 Rating
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                25–35 min
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-truck-fast"></i>
+                                Fast Delivery
+                            </span>
+
+                        </div>
+
+                        <a href="#restaurants" class="hero-btn">
+
+                            Explore Now
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PREVIOUS -->
+                <button class="slider-btn slider-prev" id="prevSlide" type="button" aria-label="Previous slide">
+
+                    <i class="fa-solid fa-chevron-left"></i>
+
+                </button>
+
+
+                <!-- NEXT -->
+                <button class="slider-btn slider-next" id="nextSlide" type="button" aria-label="Next slide">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+
+                <!-- DOTS -->
+                <div class="slider-dots" id="sliderDots">
+
+                    <button class="dot active" type="button" aria-label="Slide 1"></button>
+
+                    <button class="dot" type="button" aria-label="Slide 2"></button>
+
+                    <button class="dot" type="button" aria-label="Slide 3"></button>
+
+                    <button class="dot" type="button" aria-label="Slide 4"></button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     RESTAURANT SEARCH
+========================================================= -->
+
+        <section class="restaurant-search-section">
+
+            <div class="search-container">
+
+
+                <div class="search-title">
+
+                    <span class="search-label">
+                        <i class="fa-solid fa-store"></i>
+                        FOODHUB RESTAURANTS
+                    </span>
+
+                    <h2>
+                        Find Your Perfect Restaurant
+                    </h2>
+
+                    <p>
+                        Search restaurants by name or cuisine
+                    </p>
+
+                </div>
+
+
+                <!-- SEARCH BOX -->
+                <div class="restaurant-search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="text" id="restaurantSearch" autocomplete="off"
+                        placeholder="Search restaurant or cuisine...">
+
+                    <button id="clearSearch" type="button" aria-label="Clear search">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     RESTAURANTS
+========================================================= -->
+
+        <section class="section restaurants-section" id="restaurants">
+
+
+            <!-- SECTION HEADER -->
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DISCOVER
+                    </span>
+
+                    <h2>
+                        Popular Restaurants
+                    </h2>
+
+                    <p>
+                        Explore trusted restaurants and discover
+                        something delicious today.
+                    </p>
+
+                </div>
+
+
+                <div class="restaurant-count">
+
+                    <i class="fa-solid fa-store"></i>
+
+                    <span id="restaurantCount">
+                        8 Restaurants
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SEARCH RESULT -->
+            <div id="searchResultMessage" class="search-result-message">
+            </div>
+
+
+
+            <!-- RESTAURANT GRID -->
+            <div class="restaurant-grid" id="restaurantGrid">
+
+
+
+                <!-- =================================================
+             RESTAURANT 1
+        ================================================== -->
+
+                <article class="restaurant-card" data-name="Food Paradise" data-category="Indian Chinese Fast Food">
+
+                    <div class="restaurant-image">
+
+                        <img src="{{ url_for('static', filename='images/restaurant1.jpg') }}"
+                            alt="Food Paradise Restaurant">
+
+                        <span class="restaurant-badge orange">
+                            20% OFF
+                        </span>
+
+                    </div>
+
+
+                    <div class="restaurant-info">
+
+                        <h3>
+                            Food Paradise
+                        </h3>
+
+                        <p>
+                            Indian • Chinese • Fast Food
+                        </p>
+
+                        <div class="restaurant-meta">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.8
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                25–30 min
+                            </span>
+
+                        </div>
+
+                        <a href="/menu.html?restaurant_key=restaurant1" class="restaurant-btn">
+
+                            View Restaurant
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+             RESTAURANT 2
+        ================================================== -->
+
+                <article class="restaurant-card" data-name="Spice Garden" data-category="Biryani South Indian Indian">
+
+                    <div class="restaurant-image">
+
+                        <img src="{{ url_for('static', filename='images/restaurant2.jpg') }}"
+                            alt="Spice Garden Restaurant">
+
+                        <span class="restaurant-badge dark">
+                            POPULAR
+                        </span>
+
+                    </div>
+
+
+                    <div class="restaurant-info">
+
+                        <h3>
+                            Spice Garden
+                        </h3>
+
+                        <p>
+                            Biryani • South Indian
+                        </p>
+
+                        <div class="restaurant-meta">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.7
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                30–35 min
+                            </span>
+
+                        </div>
+
+                        <a href="/menu.html?restaurant_key=restaurant2" class="restaurant-btn">
+
+                            View Restaurant
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+             RESTAURANT 3
+        ================================================== -->
+
+                <article class="restaurant-card" data-name="Tasty Corner" data-category="Burger Burgers Pizza Snacks">
+
+                    <div class="restaurant-image">
+
+                        <img src="{{ url_for('static', filename='images/restaurant3.jpg') }}"
+                            alt="Tasty Corner Restaurant">
+
+                        <span class="restaurant-badge green">
+                            BEST SELLER
+                        </span>
+
+                    </div>
+
+
+                    <div class="restaurant-info">
+
+                        <h3>
+                            Tasty Corner
+                        </h3>
+
+                        <p>
+                            Burgers • Pizza • Snacks
+                        </p>
+
+                        <div class="restaurant-meta">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.6
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                20–30 min
+                            </span>
+
+                        </div>
+
+                        <a href="/menu.html?restaurant_key=restaurant3" class="restaurant-btn">
+
+                            View Restaurant
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+             RESTAURANT 4
+        ================================================== -->
+
+                <article class="restaurant-card" data-name="Urban Bites" data-category="Fast Food Desserts">
+
+                    <div class="restaurant-image">
+
+                        <img src="{{ url_for('static', filename='images/restaurant4.jpg') }}"
+                            alt="Urban Bites Restaurant">
+
+                        <span class="restaurant-badge blue">
+                            NEW
+                        </span>
+
+                    </div>
+
+
+                    <div class="restaurant-info">
+
+                        <h3>
+                            Urban Bites
+                        </h3>
+
+                        <p>
+                            Fast Food • Desserts
+                        </p>
+
+                        <div class="restaurant-meta">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.9
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                25–35 min
+                            </span>
+
+                        </div>
+
+                        <a href="/menu.html?restaurant_key=restaurant4" class="restaurant-btn">
+
+                            View Restaurant
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+             RESTAURANT 5
+        ================================================== -->
+
+                <article class="restaurant-card" data-name="Royal Biryani" data-category="Biryani Indian Mughlai">
+
+                    <div class="restaurant-image">
+
+                        <img src="{{ url_for('static', filename='images/restaurant5.jpg') }}"
+                            alt="Royal Biryani Restaurant">
+
+                        <span class="restaurant-badge orange">
+                            15% OFF
+                        </span>
+
+                    </div>
+
+
+                    <div class="restaurant-info">
+
+                        <h3>
+                            Royal Biryani
+                        </h3>
+
+                        <p>
+                            Biryani • Indian • Mughlai
+                        </p>
+
+                        <div class="restaurant-meta">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.8
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                25–35 min
+                            </span>
+
+                        </div>
+
+                        <a href="/menu.html?restaurant_key=restaurant5" class="restaurant-btn">
+
+                            View Restaurant
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+             RESTAURANT 6
+        ================================================== -->
+
+                <article class="restaurant-card" data-name="Pizza Street" data-category="Pizza Italian Fast Food">
+
+                    <div class="restaurant-image">
+
+                        <img src="{{ url_for('static', filename='images/restaurant6.jpg') }}"
+                            alt="Pizza Street Restaurant">
+
+                        <span class="restaurant-badge dark">
+                            POPULAR
+                        </span>
+
+                    </div>
+
+
+                    <div class="restaurant-info">
+
+                        <h3>
+                            Pizza Street
+                        </h3>
+
+                        <p>
+                            Pizza • Italian • Fast Food
+                        </p>
+
+                        <div class="restaurant-meta">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.7
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                20–30 min
+                            </span>
+
+                        </div>
+
+                        <a href="/menu.html?restaurant_key=restaurant6" class="restaurant-btn">
+
+                            View Restaurant
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+             RESTAURANT 7
+        ================================================== -->
+
+                <article class="restaurant-card" data-name="South Spice" data-category="South Indian Dosa Idli">
+
+                    <div class="restaurant-image">
+
+                        <img src="{{ url_for('static', filename='images/restaurant7.jpg') }}"
+                            alt="South Spice Restaurant">
+
+                        <span class="restaurant-badge green">
+                            TOP RATED
+                        </span>
+
+                    </div>
+
+
+                    <div class="restaurant-info">
+
+                        <h3>
+                            South Spice
+                        </h3>
+
+                        <p>
+                            South Indian • Dosa • Idli
+                        </p>
+
+                        <div class="restaurant-meta">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.9
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                20–25 min
+                            </span>
+
+                        </div>
+
+                        <a href="/menu.html?restaurant_key=restaurant7" class="restaurant-btn">
+
+                            View Restaurant
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+             RESTAURANT 8
+        ================================================== -->
+
+                <article class="restaurant-card" data-name="Fresh Sip Cafe"
+                    data-category="Juice Beverages Cafe Desserts">
+
+                    <div class="restaurant-image">
+
+                        <img src="{{ url_for('static', filename='images/restaurant8.jpg') }}" alt="Fresh Sip Cafe">
+
+                        <span class="restaurant-badge blue">
+                            NEW
+                        </span>
+
+                    </div>
+
+
+                    <div class="restaurant-info">
+
+                        <h3>
+                            Fresh Sip Cafe
+                        </h3>
+
+                        <p>
+                            Beverages • Cafe • Desserts
+                        </p>
+
+                        <div class="restaurant-meta">
+
+                            <span class="rating">
+                                <i class="fa-solid fa-star"></i>
+                                4.6
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-clock"></i>
+                                15–25 min
+                            </span>
+
+                        </div>
+
+                        <a href="/menu.html?restaurant_key=restaurant8" class="restaurant-btn">
+
+                            View Restaurant
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+
+            <!-- NO RESTAURANT -->
+            <div id="noRestaurant" class="no-restaurant">
+
+                <div class="no-restaurant-icon">
+
+                    <i class="fa-solid fa-store-slash"></i>
+
+                </div>
+
+                <h3>
+                    No restaurants found
+                </h3>
+
+                <p>
+                    Try searching with another restaurant name
+                    or cuisine.
+                </p>
+
+                <button type="button" id="resetRestaurantSearch">
+
+                    Show All Restaurants
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================================
+     PROFESSIONAL CTA
+========================================================= -->
+
+        <section class="cta-section">
+
+            <div class="cta-content">
+
+                <span class="cta-label">
+                    <i class="fa-solid fa-utensils"></i>
+                    FOODHUB
+                </span>
+
+                <h2>
+                    Great restaurants are
+                    just a click away.
+                </h2>
+
+                <p>
+                    Discover trusted restaurants, compare ratings
+                    and find your next favourite place to eat.
+                </p>
+
+                <a href="#restaurants" class="cta-btn">
+
+                    Explore Restaurants
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+     FOOTER
+========================================================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+
+            <!-- BRAND -->
+            <div class="footer-brand">
+
+                <a href="/home.html" class="footer-logo">
+
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FoodHub Logo">
+
+                    <span>
+                        FoodHub
+                    </span>
+
+                </a>
+
+                <p>
+                    Discover trusted restaurants, delicious food
+                    and fast delivery — all in one place.
+                </p>
+
+
+                <div class="social-links">
+
+                    <a href="#" aria-label="Facebook">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+                    <a href="#" aria-label="Twitter">
+
+                        <i class="fa-brands fa-x-twitter"></i>
+
+                    </a>
+
+                    <a href="#" aria-label="YouTube">
+
+                        <i class="fa-brands fa-youtube"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUICK LINKS -->
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="/home.html">
+                    Home
+                </a>
+
+                <a href="#restaurants">
+                    Restaurants
+                </a>
+
+                <a href="/menu.html">
+                    Menu
+                </a>
+
+                <a href="/offers.html">
+                    Offers
+                </a>
+
+            </div>
+
+
+
+            <!-- SUPPORT -->
+            <div class="footer-column">
+
+                <h3>
+                    Support
+                </h3>
+
+                <a href="/contact.html">
+                    Contact Us
+                </a>
+
+                <a href="/profile.html">
+                    My Profile
+                </a>
+
+                <a href="/orders.html">
+                    Track Order
+                </a>
+
+            </div>
+
+
+
+            <!-- CONTACT -->
+            <div class="footer-column">
+
+                <h3>
+                    Contact
+                </h3>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Tamil Nadu, India
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    +91 9787712948
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    periyasamymcse@gmail.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FOOTER BOTTOM -->
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 FoodHub. All Rights Reserved.
+            </p>
+
+            <p>
+                Taste. Order. Enjoy.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+     SCROLL TOP
+========================================================= -->
+
+    <button id="scrollTopBtn" class="scroll-top-btn" type="button" aria-label="Scroll to top">
+
+        <i class="fa-solid fa-arrow-up"></i>
+
+    </button>
+
+
+
+    <!-- =========================================================
+     HOME JS
+========================================================= -->
+
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+
+</body>
+
+</html>

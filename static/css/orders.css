@@ -1,0 +1,667 @@
+/* ======================================
+   FoodHub - Professional Orders CSS
+   ====================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #f6f7f9;
+    color: #222;
+}
+
+
+/* ======================================
+   NAVBAR
+   ====================================== */
+
+.navbar {
+    height: 82px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 70px;
+
+    background: #ffffff;
+
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+/* Logo */
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 88px;
+    height: 88px;
+    object-fit: contain;
+    margin-right: 12px;
+}
+
+.logo h2 {
+    color: #ff6b00;
+    font-size: 38px;
+    font-weight: 700;
+}
+
+
+/* Navbar links */
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    list-style: none;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+
+    color: #222;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.navbar ul li a:hover,
+.navbar ul li a.active {
+    color: #ff6b00;
+}
+
+
+/* ======================================
+   ORDERS SECTION
+   ====================================== */
+
+.orders {
+    width: 90%;
+    max-width: 1400px;
+
+    margin: 45px auto;
+}
+
+
+/* Page heading */
+
+.orders h1 {
+    font-size: 42px;
+    font-weight: 700;
+
+    color: #222;
+
+    margin-bottom: 30px;
+}
+
+
+/* ======================================
+   ORDER CARD
+   ====================================== */
+
+.order-card {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 30px;
+
+    background: #ffffff;
+
+    padding: 28px;
+
+    margin-bottom: 25px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ======================================
+   FOOD IMAGE
+   ====================================== */
+
+.order-image {
+    width: 170px;
+    height: 170px;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: #f3f3f3;
+}
+
+.order-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.3s;
+}
+
+.order-card:hover .order-image img {
+    transform: scale(1.05);
+}
+
+
+/* ======================================
+   ORDER DETAILS
+   ====================================== */
+
+.order-details {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* Order title + status */
+
+.order-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 15px;
+}
+
+.order-header h2 {
+    font-size: 25px;
+
+    color: #222;
+
+    font-weight: 700;
+}
+
+
+/* ======================================
+   STATUS BADGE
+   ====================================== */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 7px 16px;
+
+    border-radius: 30px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* Preparing */
+
+.status.preparing {
+    background: #ff9800;
+}
+
+
+/* Cooking */
+
+.status.cooking {
+    background: #f57c00;
+}
+
+
+/* Out for delivery */
+
+.status.out {
+    background: #2196f3;
+}
+
+
+/* Delivered */
+
+.status.delivered {
+    background: #27ae60;
+}
+
+
+/* ======================================
+   ORDER INFORMATION
+   ====================================== */
+
+.order-info {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+
+    gap: 9px 25px;
+
+    margin-bottom: 20px;
+}
+
+.order-info p {
+    color: #666;
+
+    font-size: 16px;
+}
+
+.order-info i {
+    width: 20px;
+
+    color: #ff6b00;
+
+    margin-right: 5px;
+}
+
+.order-info strong {
+    color: #333;
+}
+
+
+/* ======================================
+   ORDER TRACKING
+   ====================================== */
+
+.tracking {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    margin-top: 20px;
+}
+
+
+/* Tracking step */
+
+.step {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 85px;
+
+    padding: 9px 12px;
+
+    border-radius: 30px;
+
+    background: #eeeeee;
+
+    color: #777;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.step span {
+    font-size: 17px;
+
+    margin-bottom: 2px;
+}
+
+.step small {
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+
+/* Active step */
+
+.step.active {
+    background: #27ae60;
+
+    color: #ffffff;
+
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.25);
+}
+
+
+/* Tracking line */
+
+.line {
+    flex: 1;
+
+    height: 4px;
+
+    min-width: 25px;
+
+    background: #e0e0e0;
+
+    transition: 0.3s;
+}
+
+.line.active {
+    background: #27ae60;
+}
+
+
+/* ======================================
+   TRACK ORDER BUTTON
+   ====================================== */
+
+.order-action {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 150px;
+}
+
+.track-btn {
+    border: none;
+
+    background: #ff6b00;
+
+    color: #ffffff;
+
+    padding: 14px 25px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    white-space: nowrap;
+}
+
+.track-btn i {
+    margin-right: 7px;
+}
+
+.track-btn:hover {
+    background: #e85d00;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(255, 107, 0, 0.25);
+}
+
+
+/* ======================================
+   EMPTY ORDERS
+   ====================================== */
+
+.empty-orders {
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 70px 30px;
+
+    text-align: center;
+
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.07);
+}
+
+.empty-orders i {
+    font-size: 60px;
+
+    color: #ff6b00;
+
+    margin-bottom: 20px;
+}
+
+.empty-orders h2 {
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+.empty-orders p {
+    color: #777;
+
+    font-size: 16px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ======================================
+   BROWSE MENU / LOGIN BUTTON
+   ====================================== */
+
+.order-food-btn,
+.login-btn {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #ff6b00;
+
+    color: #ffffff;
+
+    padding: 12px 25px;
+
+    border-radius: 9px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.order-food-btn:hover,
+.login-btn:hover {
+    background: #e85d00;
+}
+
+
+/* ======================================
+   RETRY BUTTON
+   ====================================== */
+
+.retry-btn {
+    border: none;
+
+    background: #ff6b00;
+
+    color: #ffffff;
+
+    padding: 12px 25px;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.retry-btn:hover {
+    background: #e85d00;
+}
+
+
+/* ======================================
+   RESPONSIVE - TABLET
+   ====================================== */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+        padding: 0 30px;
+    }
+
+    .navbar ul {
+        gap: 18px;
+    }
+
+    .navbar ul li a {
+        font-size: 16px;
+    }
+
+    .order-card {
+        flex-wrap: wrap;
+    }
+
+    .order-details {
+        min-width: calc(100% - 200px);
+    }
+
+    .order-action {
+        width: 100%;
+
+        justify-content: flex-end;
+    }
+
+}
+
+
+/* ======================================
+   RESPONSIVE - MOBILE
+   ====================================== */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: auto;
+
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .logo h2 {
+        font-size: 30px;
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 15px;
+    }
+
+    .navbar ul li a {
+        font-size: 14px;
+    }
+
+
+    .orders {
+        width: 94%;
+
+        margin: 30px auto;
+    }
+
+    .orders h1 {
+        font-size: 32px;
+    }
+
+
+    .order-card {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 20px;
+    }
+
+
+    .order-image {
+        width: 100%;
+
+        height: 220px;
+    }
+
+
+    .order-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .order-header h2 {
+        font-size: 22px;
+    }
+
+
+    .order-info {
+        grid-template-columns: 1fr;
+    }
+
+
+    .tracking {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 8px;
+    }
+
+
+    .line {
+        display: none;
+    }
+
+
+    .step {
+        min-width: 110px;
+    }
+
+
+    .order-action {
+        width: 100%;
+
+        justify-content: stretch;
+    }
+
+
+    .track-btn {
+        width: 100%;
+    }
+
+}
