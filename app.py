@@ -5,7 +5,9 @@
 # ============================================================
 
 import os
+from dotenv import load_dotenv
 import re
+load_dotenv()
 
 from functools import wraps
 from datetime import datetime, timezone
@@ -42,7 +44,6 @@ from db import get_db
 
 app = Flask(__name__)
 app.config.from_object(Config)
-
 app.secret_key = (
     app.config.get("SECRET_KEY")
     or os.environ.get(
